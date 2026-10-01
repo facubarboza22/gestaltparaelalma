@@ -1,0 +1,12 @@
+# Secrets: never commit
+.env
+.env.*
+
+# Private context for Claude (names, emails): stays on the Mac
+CLAUDE.local.md
+
+# Drafts waiting for Sofía's approval: only approved posts go to queue/
+drafts/
+
+node_modules/
+.DS_Store
