@@ -39,9 +39,10 @@ Grow @gestaltparaelalma (a Gestalt therapist's account), get more engagement fro
 
 - [x] Meta app created, permissions added, tester invite accepted (2026-10-01)
 - [x] Local folder + GitHub repo
-- [ ] **Next: access token.** In the "personal" profile, Meta dashboard → Casos de uso → API de Instagram → "Configuración de la API con el inicio de sesión de Instagram" → "2. Genera identificadores de acceso" → Añadir cuenta. The Instagram popup must be signed in as **gestaltparaelalma** (switch accounts there first; the user types the password). The user saves the token themselves: `gh secret set IG_ACCESS_TOKEN --repo facubarboza22/gestaltparaelalma` (paste when prompted) and as `IG_ACCESS_TOKEN=` in local `.env` (check the file ends with a newline before appending). Then verify with a `/me?fields=user_id,username,account_type` call without printing the token.
-- [ ] Publisher script + daily GitHub Actions workflow + token refresh (60-day token; refresh weekly from the Mac task and update the secret with `gh secret set`)
-- [ ] Local review page for Sofía (approve / edit caption / reject / reschedule)
+- [x] Access token (2026-10-01). Generated in the "personal" profile (Meta dashboard → Casos de uso → API de Instagram → "2. Genera identificadores de acceso" → "Generar identificador" on the gestaltparaelalma row) after switching that profile's Instagram to gestaltparaelalma. Saved as GitHub secret `IG_ACCESS_TOKEN` and in local `.env`. Verified: username gestaltparaelalma, `account_type` MEDIA_CREATOR, IG user ID `17841465773777580`, publishing quota 100 per 24 h. 60-day token: **expires ~2026-11-30 unless refreshed.**
+  - Saving a secret needs an interactive terminal (the app's Terminal panel), not the chat's `!` box: `read -s` gets no input there.
+- [x] Publisher (2026-10-01): `scripts/ig.mjs` (whoami / check / publish [--dry-run] / refresh), pure helpers in `scripts/lib/queue.mjs` (tests: `node --test scripts/`), workflow `.github/workflows/publish.yml` (every 2 h, 08:17–20:17 UTC-3, one post per run, commits `published.json` / `error.json` back). Queue format in `queue/README.md`. Token expiry lives in repo variable `IG_TOKEN_EXPIRES_AT` (+ `.env`); runs go red <10 days before it, which is the email alert. `refresh` renews the token into `.env`, the secret and the variable; the weekly Mac task must call it. Not yet exercised against Instagram with a real post (dry-run and failure paths only).
+- [ ] **Next:** Local review page for Sofía (approve / edit caption / reject / reschedule)
 - [ ] Image templates (HTML → PNG with Playwright, calm Gestalt look)
 - [ ] Strategy, content pillars, calendar (`docs/`)
 - [ ] Weekly Claude task that fills next week's drafts

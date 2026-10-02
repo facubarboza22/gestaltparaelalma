@@ -1,0 +1,46 @@
+name: Publish to Instagram
+
+# Every two hours across the day (08:17 to 20:17 in Uruguay/Argentina, UTC-3),
+# publish the oldest post in queue/ whose time has come. GitHub can skip or
+# delay scheduled runs, which is why the script publishes whatever is overdue
+# instead of "this hour's" post. A red run (a failed post, or a token close to
+# expiring) is what triggers GitHub's email.
+on:
+  schedule:
+    - cron: '17 11-23/2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write # commit published.json / error.json back into queue/
+
+concurrency:
+  group: publish # never two runs at once: both would see the same due post
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Publish what is due
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_TOKEN_EXPIRES_AT: ${{ vars.IG_TOKEN_EXPIRES_AT }}
+        run: node scripts/ig.mjs publish
+
+      - name: Save results to the repo
+        if: always()
+        run: |
+          git add -A queue
+          git diff --cached --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Publisher: record results"
+          git pull --rebase
+          git push
