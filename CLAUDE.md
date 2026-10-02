@@ -23,7 +23,7 @@ Grow @gestaltparaelalma (a Gestalt therapist's account), get more engagement fro
 
 ## Accounts and IDs (not secret)
 
-- GitHub: `facubarboza22/gestaltparaelalma` (public). Push works via the repo-local `credential.helper=!gh auth git-credential` (the macOS keychain holds a different, work GitHub credential).
+- GitHub: `facubarboza22/gestaltparaelalma` (public). Push works via the repo-local `credential.helper=!gh auth git-credential` (the macOS keychain holds a different, work GitHub credential). The repo config first sets an empty `credential.helper` to clear the inherited `osxkeychain`; without it git asks the keychain first and the push gets a 403 as the work account.
 - Meta app **gestalt-publisher**: app ID `1563617255075951`, Instagram app ID `1112821461091196` (name `gestalt-publisher-IG`), Development mode (no App Review needed to post to our own tester account). Use case "Manage messaging & content on Instagram" = Instagram API with Instagram Login (`graph.instagram.com`, no Facebook Page needed).
 - Permissions added: `instagram_business_basic`, `instagram_business_content_publish`, `instagram_business_manage_insights`. Messages and comments permissions deliberately NOT added (her DMs stay private).
 - @gestaltparaelalma accepted the Instagram tester invite on 2026-10-01.
