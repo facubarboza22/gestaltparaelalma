@@ -6,7 +6,7 @@
  *                                      └──▶ failed       (error.json, after 3 tries)
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
 export const REPO = 'facubarboza22/gestaltparaelalma';
 export const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main`;
@@ -20,22 +20,30 @@ const MAX_RATIO = 1.91;
 
 const readJson = (p) => (existsSync(p) ? JSON.parse(readFileSync(p, 'utf8')) : null);
 
-export function loadQueue(root) {
-  return readdirSync(join(root, 'queue'), { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => loadPost(root, d.name))
+export const loadQueue = (root) => loadFolders(join(root, 'queue'));
+
+/** Drafts waiting for Sofía (drafts/ is gitignored). Folders starting with _ are archives. */
+export const loadDrafts = (root) => loadFolders(join(root, 'drafts'));
+
+function loadFolders(base) {
+  if (!existsSync(base)) return [];
+  return readdirSync(base, { withFileTypes: true })
+    .filter((d) => d.isDirectory() && !d.name.startsWith('_'))
+    .map((d) => loadPost(base, d.name))
     .sort((a, b) => (a.publishAt || 0) - (b.publishAt || 0) || a.name.localeCompare(b.name));
 }
 
-export function loadPost(root, name) {
-  const dir = join(root, 'queue', name);
+/** One post folder; `base` is the queue/ or drafts/ directory that holds it. */
+export function loadPost(base, name) {
+  const dir = join(base, name);
   const meta = readJson(join(dir, 'post.json')) ?? {};
   const captionFile = join(dir, 'caption.txt');
   return {
     name,
     dir,
-    path: `queue/${name}`,
+    path: `${basename(base)}/${name}`,
     approved: meta.approved === true,
+    note: meta.note ?? '',
     publishAtRaw: meta.publishAt ?? '',
     publishAt: Date.parse(meta.publishAt ?? ''),
     caption: existsSync(captionFile) ? readFileSync(captionFile, 'utf8').replace(/\r\n/g, '\n').trim() : '',
@@ -79,40 +87,43 @@ export function looksLikePhone(text) {
 
 export const hasLink = (text) => /(https?:\/\/|www\.|wa\.me|\b[a-z0-9-]+\.(com|net|org|uy|ar|me|ly|link)\b)/i.test(text);
 
-/** Everything that would make Instagram reject the post, or break the content rules. */
-export function problems(post) {
+/**
+ * Everything that would make Instagram reject the post, or break the content
+ * rules. A draft isn't approved yet by definition, so that check is skipped.
+ */
+export function problems(post, { draft = false } = {}) {
   const out = [];
-  if (!FOLDER.test(post.name)) out.push('folder name must look like 2026-10-06-short-title (lowercase, no spaces or accents)');
-  if (!post.approved) out.push('post.json needs "approved": true (only posts Sofía approved go in queue/)');
+  if (!FOLDER.test(post.name)) out.push('el nombre de la carpeta tiene que ser como 2026-10-06-titulo-corto (minúsculas, sin espacios ni tildes)');
+  if (!draft && !post.approved) out.push('post.json necesita "approved": true (en queue/ solo van posts aprobados por Sofía)');
   if (!WITH_ZONE.test(post.publishAtRaw) || Number.isNaN(post.publishAt)) {
-    out.push('post.json "publishAt" must be a date with its time zone, e.g. "2026-10-06T10:00:00-03:00"');
+    out.push('falta la fecha y hora de publicación, con zona horaria (ej. "2026-10-06T10:00:00-03:00")');
   }
 
   const c = post.caption;
-  if (!c) out.push('caption.txt is missing or empty');
-  if (c.length > 2200) out.push(`caption is ${c.length} characters (Instagram allows 2200)`);
-  if ((c.match(/#[\p{L}\p{N}_]+/gu) ?? []).length > 30) out.push('caption has more than 30 hashtags');
-  if ((c.match(/@[\w.]+/g) ?? []).length > 20) out.push('caption has more than 20 @mentions');
-  if (hasLink(c)) out.push('caption has a link: the only call to action is a DM');
-  if (looksLikePhone(c)) out.push('caption has what looks like a phone number');
+  if (!c) out.push('falta el texto (caption.txt)');
+  if (c.length > 2200) out.push(`el texto tiene ${c.length} caracteres (Instagram permite 2200)`);
+  if ((c.match(/#[\p{L}\p{N}_]+/gu) ?? []).length > 30) out.push('el texto tiene más de 30 hashtags');
+  if ((c.match(/@[\w.]+/g) ?? []).length > 20) out.push('el texto tiene más de 20 @menciones');
+  if (hasLink(c)) out.push('el texto tiene un link: la única invitación es a escribir por mensaje directo');
+  if (looksLikePhone(c)) out.push('el texto tiene algo que parece un número de teléfono');
 
   const n = post.images.length;
-  if (n === 0) out.push('no images: add 01.jpg (and 02.jpg… for a carousel)');
-  if (n > 10) out.push(`${n} images: a carousel allows 10`);
+  if (n === 0) out.push('no hay imágenes: falta 01.jpg (y 02.jpg… para un carrusel)');
+  if (n > 10) out.push(`hay ${n} imágenes: un carrusel admite hasta 10`);
   post.images.forEach((f, i) => {
-    if (f !== `${String(i + 1).padStart(2, '0')}.jpg`) out.push(`images must be numbered 01.jpg, 02.jpg… without gaps (found ${f})`);
+    if (f !== `${String(i + 1).padStart(2, '0')}.jpg`) out.push(`las imágenes van numeradas 01.jpg, 02.jpg… sin saltos (encontré ${f})`);
   });
   const ratios = new Set();
   for (const f of post.images) {
     const size = jpegSize(readFileSync(join(post.dir, f)));
     if (!size) {
-      out.push(`${f} is not a JPEG`);
+      out.push(`${f} no es un JPEG`);
       continue;
     }
     const r = size.width / size.height;
-    if (r < MIN_RATIO - 0.01 || r > MAX_RATIO + 0.01) out.push(`${f} is ${size.width}×${size.height}: use 1080×1350 (4:5)`);
+    if (r < MIN_RATIO - 0.01 || r > MAX_RATIO + 0.01) out.push(`${f} mide ${size.width}×${size.height}: tiene que ser 1080×1350 (4:5)`);
     ratios.add(r.toFixed(2));
   }
-  if (ratios.size > 1) out.push('carousel images must all have the same proportions');
+  if (ratios.size > 1) out.push('todas las imágenes del carrusel tienen que tener la misma proporción');
   return out;
 }

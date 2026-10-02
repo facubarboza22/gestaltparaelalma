@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Revisar posts</title>
+<style>
+  :root {
+    --bg: #f6f2ec;
+    --card: #fffdf9;
+    --ink: #2f2a26;
+    --muted: #7a7068;
+    --line: #e6ddd2;
+    --accent: #6f8a6a;
+    --accent-ink: #fff;
+    --danger: #a8503f;
+    --warn-bg: #fbeee6;
+    --radius: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    color: var(--ink);
+  }
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { margin: 0; background: var(--bg); }
+  header { max-width: 1040px; margin: 0 auto; padding: 28px 16px 8px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+  h1 { font: 600 24px/1.2 Georgia, serif; margin: 0; }
+  nav { max-width: 1040px; margin: 0 auto; padding: 8px 16px; display: flex; gap: 8px; flex-wrap: wrap; }
+  nav button { border: 1px solid var(--line); background: var(--card); color: var(--ink); border-radius: 999px; padding: 8px 16px; font-size: 15px; cursor: pointer; }
+  nav button[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  main { max-width: 1040px; margin: 0 auto; padding: 8px 16px 64px; display: grid; gap: 20px; }
+  .empty { color: var(--muted); padding: 40px 0; text-align: center; font-size: 17px; }
+
+  .banner { background: var(--warn-bg); border-radius: 999px; padding: 6px 8px 6px 16px; font-size: 14px; display: flex; gap: 10px; align-items: center; }
+
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 24px; padding: 20px; }
+  @media (max-width: 760px) { .card { grid-template-columns: 1fr; } }
+
+  .slides { position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--line); }
+  .track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .track::-webkit-scrollbar { display: none; }
+  .track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
+  .arrow { position: absolute; top: 50%; translate: 0 -50%; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); font-size: 18px; cursor: pointer; }
+  .arrow.prev { left: 8px; } .arrow.next { right: 8px; }
+  .dots { position: absolute; bottom: 10px; left: 0; right: 0; display: flex; justify-content: center; gap: 5px; }
+  .dots span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,.55); }
+  .dots span.on { background: #fff; }
+
+  .side { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .when { font: 600 18px/1.3 Georgia, serif; }
+  .note { color: var(--muted); font-size: 14px; }
+  label { font-size: 13px; color: var(--muted); display: grid; gap: 6px; }
+  input[type="datetime-local"] { font: inherit; font-size: 15px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink); width: max-content; max-width: 100%; }
+  textarea { font: inherit; font-size: 15px; line-height: 1.5; padding: 12px; border: 1px solid var(--line); border-radius: 10px; background: #fff; color: var(--ink); min-height: 260px; resize: vertical; width: 100%; }
+  .caption { white-space: pre-wrap; font-size: 15px; line-height: 1.5; max-height: 320px; overflow: auto; }
+  .count { font-size: 13px; color: var(--muted); text-align: right; }
+  .problems { background: var(--warn-bg); border-radius: 10px; padding: 10px 14px 10px 30px; margin: 0; font-size: 14px; color: var(--danger); }
+  .chip { display: inline-block; font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--bg); color: var(--muted); width: max-content; }
+  .chip.bad { background: var(--warn-bg); color: var(--danger); }
+
+  .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: auto; }
+  .btn { font: inherit; font-size: 15px; border-radius: 999px; padding: 10px 20px; cursor: pointer; border: 1px solid var(--line); background: #fff; color: var(--ink); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+  .btn.link { border: 0; background: none; color: var(--danger); padding: 10px 6px; }
+  .btn:disabled { opacity: .45; cursor: default; }
+  .reject { display: grid; gap: 8px; }
+  .reject textarea { min-height: 70px; }
+
+  .published { grid-template-columns: 96px minmax(0, 1fr); align-items: center; }
+  .published img { width: 96px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 8px; }
+  .published .caption { max-height: 3em; overflow: hidden; color: var(--muted); }
+  a { color: var(--accent); }
+
+  #toast { position: fixed; left: 50%; bottom: 24px; translate: -50% 0; background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 12px; font-size: 15px; max-width: min(92vw, 640px); opacity: 0; transition: opacity .2s; pointer-events: none; }
+  #toast.show { opacity: 1; }
+  #toast.error { background: var(--danger); color: #fff; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Posts de @gestaltparaelalma</h1>
+  <div id="banner"></div>
+</header>
+<nav id="tabs"></nav>
+<main id="list"></main>
+<div id="toast" role="status"></div>
+
+<script>
+const TABS = [
+  { id: 'drafts', label: 'Para revisar' },
+  { id: 'queued', label: 'Aprobados' },
+  { id: 'published', label: 'Publicados' },
+];
+let data = { drafts: [], queue: [], unpushed: 0 };
+let tab = 'drafts';
+
+const $ = (tag, attrs = {}, ...kids) => {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) el.setAttribute(k, v === true ? '' : v);
+  }
+  el.append(...kids.flat().filter((k) => k != null && k !== false));
+  return el;
+};
+
+const fmt = new Intl.DateTimeFormat('es-UY', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', timeZone: 'America/Montevideo' });
+const when = (iso) => (iso ? fmt.format(new Date(iso)) : 'Sin fecha');
+const localInput = (iso) => (iso ? iso.slice(0, 16) : '');
+const hashtags = (t) => (t.match(/#[\p{L}\p{N}_]+/gu) || []).length;
+
+function toast(msg, error = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `show${error ? ' error' : ''}`;
+  clearTimeout(t.timer);
+  t.timer = setTimeout(() => (t.className = ''), error ? 9000 : 3500);
+}
+
+async function api(action, body) {
+  const res = await fetch(`/api/${action}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(json.error || 'Algo salió mal.');
+  return json;
+}
+
+async function load() {
+  data = await (await fetch('/api/state')).json();
+  render();
+}
+
+function slides(post) {
+  const track = $('div', { class: 'track' }, post.images.map((f) => $('img', { src: `/media/${post.where}/${encodeURIComponent(post.name)}/${f}`, alt: '' })));
+  const box = $('div', { class: 'slides' }, track);
+  if (post.images.length > 1) {
+    const dots = $('div', { class: 'dots' }, post.images.map((_, i) => $('span', { class: i ? '' : 'on' })));
+    const index = () => Math.round(track.scrollLeft / track.clientWidth);
+    // Jump by index: a smooth scrollBy fights scroll-snap in Chrome and barely moves.
+    const go = (d) => track.scrollTo({ left: Math.max(0, Math.min(post.images.length - 1, index() + d)) * track.clientWidth });
+    track.addEventListener('scroll', () => {
+      const i = index();
+      [...dots.children].forEach((s, j) => s.classList.toggle('on', i === j));
+    });
+    box.append($('button', { class: 'arrow prev', 'aria-label': 'Anterior', onclick: () => go(-1) }, '‹'), $('button', { class: 'arrow next', 'aria-label': 'Siguiente', onclick: () => go(1) }, '›'), dots);
+  }
+  return box;
+}
+
+const problemList = (list) => (list.length ? $('ul', { class: 'problems' }, list.map((p) => $('li', {}, p))) : null);
+
+function draftCard(post) {
+  const date = $('input', { type: 'datetime-local', value: localInput(post.publishAt), step: 60 });
+  const text = $('textarea', { spellcheck: 'true' });
+  text.value = post.caption;
+  const count = $('div', { class: 'count' });
+  const save = $('button', { class: 'btn', disabled: true }, 'Guardar');
+  const approve = $('button', { class: 'btn primary' }, 'Aprobar');
+  const rejectBox = $('div', { class: 'reject', hidden: true });
+
+  const dirty = () => text.value.trim() !== post.caption || date.value !== localInput(post.publishAt);
+  const update = () => {
+    count.textContent = `${text.value.trim().length} / 2200 · ${hashtags(text.value)} hashtags`;
+    save.disabled = !dirty();
+  };
+  text.addEventListener('input', update);
+  date.addEventListener('input', update);
+  update();
+
+  async function persist() {
+    if (!dirty()) return post.name;
+    const r = await api('save', { name: post.name, caption: text.value, publishAt: date.value });
+    return r.name;
+  }
+
+  save.onclick = async () => {
+    try {
+      await persist();
+      toast('Guardado.');
+      load();
+    } catch (e) { toast(e.message, true); }
+  };
+
+  approve.onclick = async () => {
+    if (!date.value) return toast('Falta elegir fecha y hora.', true);
+    if (!confirm(`¿Aprobar este post? Sale el ${when(`${date.value}:00-03:00`)}.`)) return;
+    approve.disabled = true;
+    approve.textContent = 'Aprobando…';
+    try {
+      const name = await persist();
+      await api('approve', { name });
+      toast('Aprobado. Ya está en la cola para publicarse.');
+      load();
+    } catch (e) {
+      toast(e.message, true);
+      load();
+    }
+  };
+
+  const reason = $('textarea', { placeholder: '¿Por qué no? (opcional, ayuda a que los próximos salgan mejor)' });
+  rejectBox.append(reason, $('div', { class: 'actions' },
+    $('button', { class: 'btn', onclick: () => (rejectBox.hidden = true) }, 'Cancelar'),
+    $('button', { class: 'btn primary', style: 'background: var(--danger); border-color: var(--danger)', onclick: async () => {
+      try {
+        await api('reject', { name: post.name, reason: reason.value });
+        toast('Rechazado. No se publica.');
+        load();
+      } catch (e) { toast(e.message, true); }
+    } }, 'Rechazar'),
+  ));
+
+  return $('article', { class: 'card' },
+    slides(post),
+    $('div', { class: 'side' },
+      $('div', { class: 'when' }, when(post.publishAt)),
+      post.note ? $('div', { class: 'note' }, post.note) : null,
+      $('label', {}, 'Fecha y hora', date),
+      $('label', {}, 'Texto', text),
+      count,
+      problemList(post.problems),
+      $('div', { class: 'actions' }, approve, save, $('button', { class: 'btn link', onclick: () => { rejectBox.hidden = false; reason.focus(); } }, 'Rechazar')),
+      rejectBox,
+    ),
+  );
+}
+
+function queuedCard(post) {
+  const chip = post.state === 'failed'
+    ? $('span', { class: 'chip bad' }, `No se pudo publicar: ${post.error}`)
+    : post.state === 'due'
+      ? $('span', { class: 'chip' }, post.error ? `Reintentando: ${post.error}` : 'Sale en la próxima pasada')
+      : $('span', { class: 'chip' }, 'Aprobado, esperando su hora');
+  const back = $('button', { class: 'btn' }, 'Volver a borradores');
+  back.onclick = async () => {
+    if (!confirm('¿Sacarlo de la cola? Vuelve a "Para revisar" y no se publica.')) return;
+    back.disabled = true;
+    try {
+      await api('unapprove', { name: post.name });
+      toast('Volvió a "Para revisar".');
+      load();
+    } catch (e) { toast(e.message, true); load(); }
+  };
+  return $('article', { class: 'card' },
+    slides(post),
+    $('div', { class: 'side' },
+      $('div', { class: 'when' }, when(post.publishAt)),
+      chip,
+      $('div', { class: 'caption' }, post.caption),
+      problemList(post.problems),
+      $('div', { class: 'actions' }, back),
+    ),
+  );
+}
+
+function publishedCard(post) {
+  return $('article', { class: 'card published' },
+    $('img', { src: `/media/queue/${encodeURIComponent(post.name)}/${post.images[0]}`, alt: '' }),
+    $('div', { class: 'side' },
+      $('div', {}, $('strong', {}, when(post.publishedAt || post.publishAt)), ' · ', post.permalink ? $('a', { href: post.permalink, target: '_blank', rel: 'noopener' }, 'Ver en Instagram') : 'Publicado'),
+      $('div', { class: 'caption' }, post.caption),
+    ),
+  );
+}
+
+function render() {
+  const groups = {
+    drafts: data.drafts,
+    queued: data.queue.filter((p) => p.state !== 'published'),
+    published: data.queue.filter((p) => p.state === 'published').reverse(),
+  };
+  document.getElementById('tabs').replaceChildren(...TABS.map((t) =>
+    $('button', { 'aria-selected': String(t.id === tab), onclick: () => { tab = t.id; render(); } }, `${t.label} (${groups[t.id].length})`)));
+
+  const banner = document.getElementById('banner');
+  banner.replaceChildren();
+  if (data.unpushed) {
+    const up = $('button', { class: 'btn' }, 'Subir');
+    up.onclick = async () => {
+      up.disabled = true;
+      try { await api('push', {}); toast('Subido.'); } catch (e) { toast(e.message, true); }
+      load();
+    };
+    banner.append($('div', { class: 'banner' }, 'Hay aprobaciones sin subir a GitHub', up));
+  }
+
+  const list = document.getElementById('list');
+  const items = groups[tab];
+  const empty = { drafts: 'No hay borradores para revisar.', queued: 'No hay posts aprobados esperando.', published: 'Todavía no se publicó nada.' }[tab];
+  const make = { drafts: draftCard, queued: queuedCard, published: publishedCard }[tab];
+  list.replaceChildren(...(items.length ? items.map(make) : [$('div', { class: 'empty' }, empty)]));
+}
+
+load().catch(() => toast('No se pudo cargar. ¿Está abierta la ventana de Terminal?', true));
+</script>
+</body>
+</html>

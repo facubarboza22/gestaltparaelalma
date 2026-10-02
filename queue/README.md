@@ -15,6 +15,8 @@ queue/2026-10-06-que-es-gestalt/
 - `publishAt` always carries its time zone (`-03:00`). The post goes out at the first publisher run after that time (runs are every two hours, 08:17 to 20:17, and GitHub can be late).
 - Caption: no links, no phone numbers; the call to action is a DM. Max 2200 characters, 30 hashtags.
 
+Drafts (`drafts/`, gitignored, never pushed) use the same folder format, with `post.json` = `{"publishAt": "…", "note": "…"}`: no `approved`, and an optional `note` that only Sofía sees on the review page. Approving on the review page (`Revisar posts.command`, or `node scripts/review.mjs`) moves the folder here, keeps only `approved`/`publishAt`/`approvedAt` in `post.json`, and commits + pushes it. Rejected drafts go to `drafts/_rechazados/<post>/` with `rechazo.json` (`reason`, `at`): read them before writing new drafts.
+
 Written by the publisher, don't edit by hand:
 
 - `published.json`: Instagram media id, link and time. A post with this file is never published again.

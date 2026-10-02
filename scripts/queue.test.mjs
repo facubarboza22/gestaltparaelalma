@@ -20,7 +20,7 @@ function makePost(root, name, { meta = { approved: true, publishAt: '2026-10-06T
   if (caption !== null) writeFileSync(join(dir, 'caption.txt'), caption);
   for (const [f, [w, h]] of Object.entries(images)) writeFileSync(join(dir, f), fakeJpeg(w, h));
   for (const [f, data] of Object.entries(extra)) writeFileSync(join(dir, f), JSON.stringify(data));
-  return loadPost(root, name);
+  return loadPost(join(root, 'queue'), name);
 }
 
 const tmp = () => mkdtempSync(join(tmpdir(), 'gestalt-queue-'));
@@ -59,11 +59,18 @@ test('broken posts list every problem', () => {
     images: { '01.jpg': [1080, 1080], '03.jpg': [1080, 1350] },
   });
   const p = problems(post).join('\n');
-  for (const want of ['folder name', '"approved": true', 'time zone', 'link', 'phone', 'without gaps', 'same proportions']) {
+  for (const want of ['nombre de la carpeta', '"approved": true', 'zona horaria', 'link', 'teléfono', 'sin saltos', 'misma proporción']) {
     assert.match(p, new RegExp(want.replace(/[.*+?^${}()|[\]\\"]/g, '\\$&')));
   }
-  assert.match(problems(makePost(root, '2026-10-08-sin-texto', { caption: null, images: {} })).join('\n'), /caption.txt is missing[\s\S]*no images/);
-  assert.match(problems(makePost(root, '2026-10-09-apaisada', { images: { '01.jpg': [2000, 1000] } })).join('\n'), /use 1080×1350/);
+  assert.match(problems(makePost(root, '2026-10-08-sin-texto', { caption: null, images: {} })).join('\n'), /falta el texto[\s\S]*no hay imágenes/);
+  assert.match(problems(makePost(root, '2026-10-09-apaisada', { images: { '01.jpg': [2000, 1000] } })).join('\n'), /tiene que ser 1080×1350/);
+});
+
+test('a draft is not required to be approved yet', () => {
+  const root = tmp();
+  const post = makePost(root, '2026-10-06-borrador', { meta: { publishAt: '2026-10-06T10:00:00-03:00' } });
+  assert.deepEqual(problems(post, { draft: true }), []);
+  assert.match(problems(post).join('\n'), /"approved": true/);
 });
 
 test('state: scheduled, due, published, failed', () => {
