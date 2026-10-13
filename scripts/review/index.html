@@ -38,6 +38,8 @@
   .slides { position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; background: var(--line); }
   .track { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
   .track::-webkit-scrollbar { display: none; }
+  .slides.reel { aspect-ratio: 9 / 16; background: #000; }
+  .slides.reel video { width: 100%; height: 100%; object-fit: contain; display: block; }
   .track img { flex: 0 0 100%; width: 100%; height: 100%; object-fit: cover; scroll-snap-align: start; }
   .arrow { position: absolute; top: 50%; translate: 0 -50%; width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.85); font-size: 18px; cursor: pointer; }
   .arrow.prev { left: 8px; } .arrow.next { right: 8px; }
@@ -129,6 +131,10 @@ async function load() {
 }
 
 function slides(post) {
+  if (post.video) {
+    const src = (f) => `/media/${post.where}/${encodeURIComponent(post.name)}/${f}`;
+    return $('div', { class: 'slides reel' }, $('video', { src: src(post.video), poster: post.cover ? src(post.cover) : null, controls: true, playsinline: true, preload: 'metadata' }));
+  }
   const track = $('div', { class: 'track' }, post.images.map((f) => $('img', { src: `/media/${post.where}/${encodeURIComponent(post.name)}/${f}`, alt: '' })));
   const box = $('div', { class: 'slides' }, track);
   if (post.images.length > 1) {
@@ -252,7 +258,7 @@ function queuedCard(post) {
 
 function publishedCard(post) {
   return $('article', { class: 'card published' },
-    $('img', { src: `/media/queue/${encodeURIComponent(post.name)}/${post.images[0]}`, alt: '' }),
+    $('img', { src: `/media/queue/${encodeURIComponent(post.name)}/${post.images[0] ?? post.cover}`, alt: '' }),
     $('div', { class: 'side' },
       $('div', {}, $('strong', {}, when(post.publishedAt || post.publishAt)), ' · ', post.permalink ? $('a', { href: post.permalink, target: '_blank', rel: 'noopener' }, 'Ver en Instagram') : 'Publicado'),
       $('div', { class: 'caption' }, post.caption),

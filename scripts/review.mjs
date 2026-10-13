@@ -16,7 +16,7 @@
  */
 import { spawn, spawnSync } from 'node:child_process';
 import { createServer } from 'node:http';
-import { existsSync, mkdirSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { createReadStream, existsSync, mkdirSync, readFileSync, renameSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDrafts, loadPost, loadQueue, problems, state } from './lib/queue.mjs';
@@ -93,6 +93,8 @@ function view(post, now, draft) {
     caption: post.caption,
     note: post.note,
     images: post.images,
+    video: post.video,
+    cover: post.cover,
     state: draft ? 'draft' : state(post, now),
     problems: draft ? problems(post, { draft: true }) : state(post, now) === 'published' ? [] : problems(post),
     permalink: post.published?.permalink ?? '',
@@ -185,11 +187,25 @@ const actions = {
     }),
 };
 
-const TYPES = { '.jpg': 'image/jpeg', '.html': 'text/html; charset=utf-8' };
+const TYPES = { '.jpg': 'image/jpeg', '.mp4': 'video/mp4', '.html': 'text/html; charset=utf-8' };
 
 function send(res, status, body, type = 'application/json; charset=utf-8') {
   res.writeHead(status, { 'Content-Type': type, 'Cache-Control': 'no-store' });
   res.end(typeof body === 'string' || Buffer.isBuffer(body) ? body : JSON.stringify(body));
+}
+
+/** Safari won't play a <video> unless the server answers Range requests. */
+function sendVideo(req, res, file) {
+  const size = statSync(file).size;
+  const m = /^bytes=(\d*)-(\d*)$/.exec(req.headers.range ?? '');
+  if (!m) {
+    res.writeHead(200, { 'Content-Type': TYPES['.mp4'], 'Content-Length': size, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-store' });
+    return createReadStream(file).pipe(res);
+  }
+  const start = m[1] ? Number(m[1]) : size - Number(m[2]);
+  const end = m[1] && m[2] ? Math.min(Number(m[2]), size - 1) : size - 1;
+  res.writeHead(206, { 'Content-Type': TYPES['.mp4'], 'Content-Length': end - start + 1, 'Content-Range': `bytes ${start}-${end}/${size}`, 'Accept-Ranges': 'bytes', 'Cache-Control': 'no-store' });
+  createReadStream(file, { start, end }).pipe(res);
 }
 
 async function readBody(req) {
@@ -204,9 +220,10 @@ const server = createServer(async (req, res) => {
     if (req.method === 'GET' && url.pathname === '/') return send(res, 200, readFileSync(PAGE), TYPES['.html']);
     if (req.method === 'GET' && url.pathname === '/api/state') return send(res, 200, snapshot());
 
-    const media = /^\/media\/(drafts|queue)\/([^/]+)\/(\d{2}\.jpg)$/.exec(url.pathname);
+    const media = /^\/media\/(drafts|queue)\/([^/]+)\/(\d{2}\.jpg|cover\.jpg|reel\.mp4)$/.exec(url.pathname);
     if (req.method === 'GET' && media) {
       const dir = folder(media[1] === 'drafts' ? DRAFTS : QUEUE, decodeURIComponent(media[2]));
+      if (media[3] === 'reel.mp4') return sendVideo(req, res, join(dir, media[3]));
       return send(res, 200, readFileSync(join(dir, media[3])), TYPES[extname(media[3])]);
     }
 

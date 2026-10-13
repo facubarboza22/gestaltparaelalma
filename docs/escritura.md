@@ -1,0 +1,51 @@
+# Cómo escribimos (para que suene a Rosario, no a una máquina)
+
+Reglas para cada texto de la cuenta: placas, captions y reels. Se aplican antes de mandar un borrador a revisión. Si una frase rompe una regla, se reescribe; no se "suaviza".
+
+## La voz
+
+- Rosario habla en primera persona, con voseo uruguayo: "tenés", "fijate", "laburo", "ómnibus", "el mate". Nada de "colectivo", "bondi" ni "vale".
+- Escribe como habla una persona de 67 años que escucha mucho: frases claras, sin apuro, sin palabras de moda.
+- Cálida, nunca empalagosa. No trata al lector de "alma bella" ni de "guerrero".
+- No inventa recuerdos ni anécdotas suyas. Si un texto necesita algo personal, se deja marcado para que Sofía lo confirme con ella.
+
+## Lo concreto le gana a lo abstracto
+
+- Escenas chicas antes que conceptos: "el mate que se enfrió en la mesa" en lugar de "la falta de tiempo para uno mismo".
+- Una sola idea por placa.
+- Si aparece un concepto gestáltico, se explica en criollo en la misma placa (por ejemplo, "retroflexión: lo que no le dije al otro, me lo termino haciendo a mí").
+
+## Palabras y giros prohibidos
+
+Suenan a texto generado o a folleto de bienestar. No van:
+
+- "viaje", "camino hacia", "sanar", "abrazar" (en sentido figurado), "transformar", "potenciar", "conectar con tu esencia", "tu mejor versión", "espacio seguro", "herramientas", "gestionar las emociones", "clave", "profundo", "poderoso", "mágico", "universo", "vibrar", "manifestar", "mantra".
+- "En un mundo donde…", "En la vorágine de…", "Hoy más que nunca…", "No estás solo/a en esto".
+- Mayúsculas de título ("Un Viaje Hacia El Aquí Y Ahora").
+
+## Estructuras que delatan a una máquina
+
+- **El contraste armado**: "No es X, es Y", "No se trata de X sino de Y", "Más que X, Y". Decir directamente lo que es.
+- **Las tríadas**: tres adjetivos o tres frases paralelas seguidas ("escuchar, acompañar y sostener"). Si hacen falta tres cosas, que sean escenas distintas y de largo distinto.
+- **Guiones largos** (—). No se usan. Coma, punto o paréntesis.
+- **Preguntas retóricas en cadena**. Como mucho una pregunta por placa, y que sea una pregunta de verdad, que se pueda contestar.
+- **Cierres de moraleja**: "Y eso, al final, es lo más importante." Terminar en la escena o en la invitación.
+- **Ritmo parejo**: si todas las frases miden lo mismo, cortar una y alargar otra.
+- **Emojis**: como máximo uno por caption, y del estilo que ya usa Rosario (🌱). Nunca uno por párrafo.
+
+## Salud: lo que nunca
+
+- Nunca diagnosticar ni prometer resultados ("vas a dejar de tener dolores").
+- Cuando se habla de síntomas del cuerpo: siempre recordar que lo primero es consultar al médico si el dolor es fuerte, nuevo o se repite.
+- Nada de historias de pacientes, ni inventadas ni "basadas en".
+- Datos solo con fuente verificada (la lista está en `docs/investigacion/`). Si no hay fuente, no va el dato.
+- Citas de autores solo si están verificadas en una fuente primaria. Ejemplo: "Perder la cabeza y volver a los sentidos", que circula atribuida a Perls, **no tiene fuente**: no se usa.
+
+## La invitación
+
+- Siempre la misma idea, con palabras que cambian: escribir por mensaje directo para coordinar una consulta de bienvenida. "Atiendo en Uruguay y también online."
+- Nunca teléfono, dirección ni links.
+
+## Antes de mandar a revisión
+
+Leer el texto en voz alta. Si alguna frase no la diría Rosario tomando un café, se cambia.

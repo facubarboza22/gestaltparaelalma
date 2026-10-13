@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!--
+  One template for every slide and reel frame. scripts/render.mjs opens it in
+  Playwright, calls window.paint(slide, ctx) and takes a screenshot.
+  Look: the account's sage green and cream, a warm serif, Rosario's
+  handwriting-like notes, and paper grain. No gradients, no stock icons.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,50..100;1,9..144,300..500,50..100&family=Karla:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3ece0;
+    --paper-2: #ece4d5;
+    --ink: #2a362e;
+    --muted: #6b766d;
+    --sage: #709279;
+    --sage-deep: #4d6a56;
+    --clay: #b0674e;
+    --w: 1080px;
+    --h: 1350px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: var(--w); height: var(--h); overflow: hidden; background: var(--paper); }
+  body { font-family: Karla, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+  .slide { position: relative; width: var(--w); height: var(--h); padding: 120px 104px 150px; display: flex; flex-direction: column; background: var(--paper); overflow: hidden; }
+  .slide.sage { background: var(--sage); color: var(--paper); }
+  .slide.sage .muted, .slide.sage .foot { color: rgba(244, 238, 227, .78); }
+  .slide.deep { background: var(--sage-deep); color: var(--paper); }
+  .slide.deep .foot { color: rgba(244, 238, 227, .7); }
+
+  /* Paper grain: procedural noise, multiplied over the flat colour. */
+  .grain { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; opacity: .5; }
+  .slide.sage .grain, .slide.deep .grain { opacity: .38; }
+
+  .mark { font: 500 28px/1 Karla, sans-serif; letter-spacing: .14em; text-transform: lowercase; color: var(--muted); }
+  .slide.sage .mark, .slide.deep .mark { color: rgba(244, 238, 227, .8); }
+
+  .kicker { font: 600 54px/1 Caveat, cursive; color: var(--clay); position: relative; display: inline-block; margin-bottom: 34px; }
+  .slide.sage .kicker, .slide.deep .kicker { color: #f6dccb; }
+  .kicker svg { position: absolute; left: -6px; bottom: -16px; overflow: visible; }
+
+  h1, h2 { font-family: Fraunces, serif; font-variation-settings: "SOFT" 100, "opsz" 144; font-weight: 380; letter-spacing: -.012em; }
+  h1 { font-size: 104px; line-height: 1.02; }
+  h2 { font-size: 72px; line-height: 1.08; }
+  h1 em, h2 em { font-style: italic; font-weight: 340; }
+  .body { font: 400 40px/1.42 Karla, sans-serif; margin-top: 40px; max-width: 860px; }
+  .body p + p { margin-top: 26px; }
+  .body strong { font-weight: 600; }
+  .lines { list-style: none; margin-top: 46px; display: grid; gap: 30px; }
+  .lines li { font: 400 40px/1.36 Karla, sans-serif; padding-left: 52px; position: relative; max-width: 860px; }
+  .lines li > span { position: absolute; left: -16px; top: -2px; }
+  .hand { font: 500 50px/1.15 Caveat, cursive; color: var(--clay); }
+  .slide.sage .hand, .slide.deep .hand { color: #f6dccb; }
+
+  .note { margin-top: 48px; border: 2px solid rgba(42, 54, 46, .2); border-radius: 6px; padding: 44px 48px; background: rgba(255, 252, 245, .55); transform: rotate(-.6deg); }
+  .note .hand { display: block; margin-bottom: 18px; }
+  .note ol { margin: 8px 0 0 0; padding-left: 40px; font: 400 38px/1.4 Karla, sans-serif; }
+  .note ol li + li { margin-top: 16px; }
+
+  .grow { flex: 1; }
+  .center { margin: auto 0; }
+  .art { position: absolute; pointer-events: none; }
+
+  .foot { position: absolute; left: 104px; right: 104px; bottom: 76px; display: flex; justify-content: space-between; align-items: baseline; font: 500 25px/1 Karla, sans-serif; letter-spacing: .04em; color: var(--muted); }
+  .swipe { font: 600 44px/1 Caveat, cursive; letter-spacing: 0; }
+
+  .cta { align-items: flex-start; }
+  .portrait { width: 300px; height: 300px; border-radius: 50%; overflow: hidden; border: 10px solid var(--paper); box-shadow: 0 0 0 2px rgba(42, 54, 46, .18); margin-bottom: 56px; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transform: scale(1.5); transform-origin: 54% 22%; }
+  .sign { font: 600 92px/1 Caveat, cursive; color: var(--clay); margin-top: 40px; transform: rotate(-3deg); transform-origin: left; }
+  .slide.sage .sign, .slide.deep .sign { color: #f6dccb; }
+
+  /* Reel frames: 1080x1920, content kept inside Instagram's clear band. */
+  body.reel, body.reel .slide { width: 1080px; height: 1920px; }
+  body.reel .slide { padding: 300px 110px 520px; justify-content: center; }
+  .fade { transition: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Seeded random, so a re-render draws the same "hand-drawn" strokes.
+function rng(seed) {
+  let s = seed >>> 0 || 1;
+  return () => ((s = Math.imul(s ^ (s >>> 15), 2246822507) ^ Math.imul(s ^ (s >>> 13), 3266489909)) >>> 0) / 4294967296;
+}
+
+/** A circle drawn by hand: two loose passes that don't quite close. */
+function handCircle(r, { seed = 1, color = 'currentColor', width = 4, passes = 2 } = {}) {
+  const rand = rng(seed);
+  const pad = 20;
+  const size = r * 2 + pad * 2;
+  let paths = '';
+  for (let p = 0; p < passes; p++) {
+    const start = rand() * Math.PI * 2;
+    const sweep = Math.PI * 2 * (p ? 0.92 + rand() * 0.06 : 1.04);
+    const pts = [];
+    for (let i = 0; i <= 64; i++) {
+      const a = start + (sweep * i) / 64;
+      const wob = 1 + (rand() - 0.5) * 0.025 + Math.sin(a * 3 + p) * 0.012;
+      pts.push([size / 2 + Math.cos(a) * r * wob * (1 + p * 0.015), size / 2 + Math.sin(a) * r * wob * (1 - p * 0.01)]);
+    }
+    paths += `<path d="M${pts.map((q) => q.map((v) => v.toFixed(1)).join(' ')).join(' L')}" fill="none" stroke="${color}" stroke-width="${p ? width * 0.6 : width}" stroke-linecap="round" stroke-linejoin="round" opacity="${p ? 0.55 : 0.9}"/>`;
+  }
+  return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}</svg>`;
+}
+
+/** A wobbly underline under a handwritten word. */
+function handLine(w, { seed = 3, color = 'currentColor', width = 4 } = {}) {
+  const rand = rng(seed);
+  const pts = [];
+  for (let i = 0; i <= 12; i++) pts.push([(w * i) / 12, 8 + (rand() - 0.5) * 6 + Math.sin(i / 2) * 2]);
+  return `<svg width="${w}" height="20" viewBox="0 0 ${w} 20"><path d="M${pts.map((q) => q.map((v) => v.toFixed(1)).join(' ')).join(' L')}" fill="none" stroke="${color}" stroke-width="${width}" stroke-linecap="round" opacity=".75"/></svg>`;
+}
+
+/** Bullet: a tiny hand-drawn circle (the same stroke as the snowball). */
+const handDot = (seed) => `<span style="color:#b0674e">${handCircle(9, { seed, width: 3.5, passes: 1 })}</span>`;
+
+const grain = (seed) => `<svg class="grain" width="100%" height="100%"><filter id="g${seed}"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" seed="${seed}" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .42  0 0 0 0 .38  0 0 0 0 .32  0 0 0 .55 0"/></filter><rect width="100%" height="100%" filter="url(#g${seed})"/></svg>`;
+
+const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+/** *italic* and **bold**, nothing else. */
+const md = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
+const paras = (s) => String(s ?? '').split(/\n\n+/).map((p) => `<p>${md(p)}</p>`).join('');
+
+function kicker(text, seed) {
+  if (!text) return '';
+  const w = Math.max(80, Math.round(text.length * 23));
+  return `<div><span class="kicker">${esc(text)}${handLine(w, { seed })}</span></div>`;
+}
+
+/** Decorative hand-drawn circles: the "snowball" grows across a carousel. */
+function art(a, seed) {
+  if (!a) return '';
+  const color = a.color ?? '#b0674e';
+  return `<div class="art" style="left:${a.x}px;top:${a.y}px;color:${color}">${handCircle(a.r, { seed: seed * 7 + 1, width: a.width ?? 4 })}</div>`;
+}
+
+const LAYOUTS = {
+  cover: (s) => `
+    <div class="mark">gestalt para el alma</div>
+    <div class="center">
+      ${kicker(s.kicker, 11)}
+      <h1 style="font-size:${s.size ?? 124}px">${md(s.title)}</h1>
+      ${s.hand ? `<div class="hand" style="margin-top:48px;font-size:58px">${md(s.hand)}</div>` : ''}
+    </div>`,
+  text: (s) => `
+    <div class="center">
+      ${kicker(s.kicker, s.n * 5)}
+      ${s.title ? `<h2>${md(s.title)}</h2>` : ''}
+      ${s.body ? `<div class="body">${paras(s.body)}</div>` : ''}
+      ${s.lines ? `<ul class="lines">${s.lines.map((l, i) => `<li>${handDot(s.n * 13 + i)}${md(l)}</li>`).join('')}</ul>` : ''}
+      ${s.hand ? `<div class="hand" style="margin-top:44px">${md(s.hand)}</div>` : ''}
+    </div>`,
+  big: (s) => `
+    <div class="center">
+      ${kicker(s.kicker, s.n * 5)}
+      <h1 style="font-size:${s.size ?? 92}px">${md(s.title)}</h1>
+      ${s.body ? `<div class="body">${paras(s.body)}</div>` : ''}
+    </div>`,
+  note: (s) => `
+    <div class="center">
+      ${s.title ? `<h2>${md(s.title)}</h2>` : ''}
+      <div class="note">
+        <span class="hand">${esc(s.hand ?? 'para probar')}</span>
+        ${s.body ? `<div class="body" style="margin-top:0">${paras(s.body)}</div>` : ''}
+        ${s.steps ? `<ol>${s.steps.map((x) => `<li>${md(x)}</li>`).join('')}</ol>` : ''}
+      </div>
+      ${s.after ? `<div class="body">${paras(s.after)}</div>` : ''}
+    </div>`,
+  cta: (s, ctx) => `
+    <div class="center cta" style="display:flex;flex-direction:column">
+      ${ctx.portrait ? `<div class="portrait"><img src="${ctx.portrait}"></div>` : ''}
+      <h2>${md(s.title)}</h2>
+      ${s.body ? `<div class="body">${paras(s.body)}</div>` : ''}
+      <div class="sign">Rosario</div>
+    </div>`,
+};
+
+/*
+ * Reels: every scene is laid out once, then seek(t) sets opacity and motion
+ * for the frame at t seconds. Timing is all here, so frames are deterministic.
+ */
+const ease = (x) => (x <= 0 ? 0 : x >= 1 ? 1 : x * x * (3 - 2 * x));
+const FADE = 0.9;
+let reelScenes = [];
+
+window.reel = async (spec) => {
+  document.body.classList.add('reel');
+  const root = document.getElementById('root');
+  reelScenes = spec.scenes;
+  root.innerHTML = `<section class="slide ${spec.bg ?? ''}" style="position:relative">${grain(7)}${spec.scenes
+    .map((s, i) => {
+      if (s.breath) {
+        return `<div class="scene" data-i="${i}" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0">
+          <div class="bwrap" style="position:relative;width:640px;height:640px;display:flex;align-items:center;justify-content:center">
+            <div class="ball" style="position:absolute;width:620px;height:620px;border-radius:50%;background:rgba(244,238,227,.16)"></div>
+            <div class="ring" style="position:absolute;color:#f4eee3">${handCircle(300, { seed: 41, width: 5 })}</div>
+            <div class="bword" style="position:relative;font:500 84px/1 Caveat,cursive;color:#f4eee3"></div>
+          </div>
+          <div class="bcount" style="margin-top:90px;font:500 32px/1 Karla,sans-serif;letter-spacing:.1em;color:rgba(244,238,227,.8)"></div>
+        </div>`;
+      }
+      return `<div class="scene" data-i="${i}" style="position:absolute;inset:0;padding:300px 110px 520px;display:flex;flex-direction:column;justify-content:center;opacity:0">
+        ${s.kicker ? kicker(s.kicker, i * 5 + 2) : ''}
+        ${s.title ? `<h1 style="font-size:${s.size ?? 104}px">${md(s.title)}</h1>` : ''}
+        ${s.body ? `<div class="body" style="font-size:54px;margin-top:48px">${paras(s.body)}</div>` : ''}
+        ${s.hand ? `<div class="hand later" style="margin-top:60px;font-size:84px">${md(s.hand)}</div>` : ''}
+        ${s.sign ? `<div class="sign later" style="font-size:110px">Rosario</div><div class="later" style="margin-top:40px;font:500 30px/1 Karla,sans-serif;letter-spacing:.06em;opacity:.8">@gestaltparaelalma</div>` : ''}
+      </div>`;
+    })
+    .join('')}</section>`;
+  await document.fonts.ready;
+};
+
+window.seek = (t) => {
+  for (const el of document.querySelectorAll('.scene')) {
+    const s = reelScenes[+el.dataset.i];
+    const fin = ease((t - s.from) / FADE);
+    const fout = s.last ? 1 : 1 - ease((t - (s.to - FADE)) / FADE);
+    const o = Math.min(fin, fout);
+    el.style.opacity = o.toFixed(3);
+    el.style.transform = `translateY(${((1 - fin) * 24).toFixed(1)}px)`;
+    for (const later of el.querySelectorAll('.later')) {
+      const at = s.from + (s.handAt ?? 2.5);
+      later.style.opacity = ease((t - at) / FADE).toFixed(3);
+    }
+    if (s.breath && o > 0) {
+      const { cycles, inhale, exhale } = s.breath;
+      const cyc = inhale + exhale;
+      const local = Math.max(0, t - s.from - 1.2);
+      const k = Math.min(cycles - 1, Math.floor(local / cyc));
+      const u = local - k * cyc;
+      const done = local >= cycles * cyc;
+      // Sine easing in and out, like a real breath: never a linear pump.
+      const size = done ? 0.55 : u < inhale ? 0.55 + 0.45 * (0.5 - 0.5 * Math.cos((Math.PI * u) / inhale)) : 1 - 0.45 * (0.5 - 0.5 * Math.cos((Math.PI * (u - inhale)) / exhale));
+      el.querySelector('.ball').style.transform = `scale(${size.toFixed(4)})`;
+      el.querySelector('.ring').style.transform = `scale(${(0.6 + size * 0.42).toFixed(4)}) rotate(${(t * 2).toFixed(2)}deg)`;
+      el.querySelector('.bword').textContent = done ? '' : u < inhale ? s.breath.inWord : s.breath.outWord;
+      el.querySelector('.bcount').textContent = done ? '' : `${k + 1} de ${cycles}`;
+    }
+  }
+};
+
+window.paint = async (s, ctx) => {
+  const root = document.getElementById('root');
+  document.body.classList.toggle('reel', !!ctx.reel);
+  const layout = LAYOUTS[s.layout ?? 'text'];
+  if (!layout) throw new Error(`unknown layout ${s.layout}`);
+  const foot = ctx.reel ? '' : `<div class="foot"><span>@gestaltparaelalma</span>${s.layout === 'cover' ? '<span class="swipe">deslizá →</span>' : `<span>${s.n}/${ctx.total}</span>`}</div>`;
+  root.innerHTML = `<section class="slide ${s.bg ?? ''}">${grain(s.n + 3)}${(s.art ?? []).map((a, i) => art(a, s.n * 10 + i)).join('')}${layout(s, ctx)}${foot}</section>`;
+  await document.fonts.ready;
+  await Promise.all([...root.querySelectorAll('img')].map((img) => (img.complete ? null : new Promise((r) => (img.onload = img.onerror = r)))));
+};
+</script>
+</body>
+</html>

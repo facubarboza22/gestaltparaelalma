@@ -1,6 +1,7 @@
 /**
  * Instagram publisher for @gestaltparaelalma (Instagram API with Instagram
- * Login, graph.instagram.com). Posts come from queue/ (see queue/README.md).
+ * Login, graph.instagram.com). Posts come from queue/ (see queue/README.md):
+ * single images, carousels and Reels.
  *
  *   node scripts/ig.mjs whoami              which account the token belongs to (read-only)
  *   node scripts/ig.mjs check               validate every post in queue/ and show its state (no token needed)
@@ -20,7 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { existsSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { MAX_ATTEMPTS, RAW_BASE, REPO, loadQueue, problems, state } from './lib/queue.mjs';
+import { MAX_ATTEMPTS, RAW_BASE, REPO, cdnBase, loadQueue, problems, state } from './lib/queue.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const API = 'https://graph.instagram.com/v25.0';
@@ -56,14 +57,15 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const writeJson = (p, data) => writeFileSync(p, JSON.stringify(data, null, 2) + '\n');
 const day = (ms) => new Date(ms).toISOString().slice(0, 10);
 
-async function waitFinished(id) {
-  for (let i = 0; i < 60; i++) {
+/** Images are ready in seconds; a Reel's video can stay IN_PROGRESS for minutes. */
+async function waitFinished(id, minutes = 3) {
+  for (let i = 0; i < minutes * 20; i++) {
     const s = await call(`/${id}`, { params: { fields: 'status_code,status' } });
     if (s.status_code === 'FINISHED') return;
     if (s.status_code === 'ERROR' || s.status_code === 'EXPIRED') throw new Error(`container ${id}: ${s.status_code} ${s.status ?? ''}`);
     await sleep(3000);
   }
-  throw new Error(`container ${id} still processing after 3 minutes`);
+  throw new Error(`container ${id} still processing after ${minutes} minutes`);
 }
 
 function tokenWarning(now) {
@@ -85,7 +87,14 @@ async function publishPost(post) {
 
   const urls = post.images.map((f) => `${RAW_BASE}/${post.path}/${f}`);
   let creationId;
-  if (urls.length === 1) {
+  if (post.video) {
+    // The checked-out commit contains the approved reel (it was pushed before it was due).
+    const sha = process.env.GITHUB_SHA || spawnSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).stdout.trim();
+    const params = { media_type: 'REELS', video_url: `${cdnBase(sha)}/${post.path}/${post.video}`, caption: post.caption, share_to_feed: 'true' };
+    if (post.cover) params.cover_url = `${RAW_BASE}/${post.path}/${post.cover}`;
+    creationId = (await call(`/${igId}/media`, { method: 'POST', params })).id;
+    await waitFinished(creationId, 8);
+  } else if (urls.length === 1) {
     creationId = (await call(`/${igId}/media`, { method: 'POST', params: { image_url: urls[0], caption: post.caption } })).id;
   } else {
     const children = [];
@@ -124,7 +133,8 @@ async function publish(dryRun) {
       continue;
     }
     if (dryRun) {
-      console.log(`would publish ${post.name} (${post.images.length} image${post.images.length > 1 ? 's' : ''}), due ${post.publishAtRaw}`);
+      const what = post.video ? 'reel' : `${post.images.length} image${post.images.length > 1 ? 's' : ''}`;
+      console.log(`would publish ${post.name} (${what}), due ${post.publishAtRaw}`);
       break;
     }
     try {

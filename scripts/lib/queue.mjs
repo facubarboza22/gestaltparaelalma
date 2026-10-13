@@ -2,14 +2,24 @@
  * The post queue: one folder per approved post under queue/ (format in
  * queue/README.md). Pure helpers, no network: the CLI and the tests use them.
  *
+ * A folder holds NN.jpg slides (single image or carousel) or reel.mp4 (+ an
+ * optional cover.jpg) for a Reel.
+ *
  *   approved ──(publishAt passed)──▶ due ──▶ published   (published.json)
  *                                      └──▶ failed       (error.json, after 3 tries)
  */
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const REPO = 'facubarboza22/gestaltparaelalma';
 export const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main`;
+/**
+ * Videos go through jsDelivr, pinned to a commit: raw.githubusercontent.com
+ * serves .mp4 as application/octet-stream, jsDelivr as video/mp4. jsDelivr
+ * only serves GitHub files up to 20 MB.
+ */
+export const cdnBase = (sha) => `https://cdn.jsdelivr.net/gh/${REPO}@${sha}`;
+export const MAX_VIDEO_BYTES = 20 * 1024 * 1024;
 export const MAX_ATTEMPTS = 3;
 
 const FOLDER = /^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/;
@@ -48,6 +58,8 @@ export function loadPost(base, name) {
     publishAt: Date.parse(meta.publishAt ?? ''),
     caption: existsSync(captionFile) ? readFileSync(captionFile, 'utf8').replace(/\r\n/g, '\n').trim() : '',
     images: readdirSync(dir).filter((f) => /^\d{2}\.jpg$/.test(f)).sort(),
+    video: existsSync(join(dir, 'reel.mp4')) ? 'reel.mp4' : null,
+    cover: existsSync(join(dir, 'cover.jpg')) ? 'cover.jpg' : null,
     published: readJson(join(dir, 'published.json')),
     error: readJson(join(dir, 'error.json')),
   };
@@ -80,9 +92,16 @@ export function jpegSize(buf) {
   return null;
 }
 
+/**
+ * Public crisis lines that may appear in a caption (verified on gub.uy,
+ * 2026-10-01). Add a line here only after checking it on an official source.
+ */
+export const CRISIS_LINES = ['0800 0767', '*0767', '0800 1920', '911'];
+
 /** Long digit runs that aren't a date: the therapist's number must never go public. */
 export function looksLikePhone(text) {
-  return (text.match(/\+?\d[\d\s.()-]{6,}\d/g) ?? []).some((m) => !/^\d{4}-\d{2}-\d{2}$/.test(m) && m.replace(/\D/g, '').length >= 8);
+  const rest = CRISIS_LINES.reduce((t, line) => t.split(line).join(' '), text);
+  return (rest.match(/\+?\d[\d\s.()-]{6,}\d/g) ?? []).some((m) => !/^\d{4}-\d{2}-\d{2}$/.test(m) && m.replace(/\D/g, '').length >= 8);
 }
 
 export const hasLink = (text) => /(https?:\/\/|www\.|wa\.me|\b[a-z0-9-]+\.(com|net|org|uy|ar|me|ly|link)\b)/i.test(text);
@@ -107,8 +126,10 @@ export function problems(post, { draft = false } = {}) {
   if (hasLink(c)) out.push('el texto tiene un link: la única invitación es a escribir por mensaje directo');
   if (looksLikePhone(c)) out.push('el texto tiene algo que parece un número de teléfono');
 
+  if (post.video) return [...out, ...reelProblems(post)];
+
   const n = post.images.length;
-  if (n === 0) out.push('no hay imágenes: falta 01.jpg (y 02.jpg… para un carrusel)');
+  if (n === 0) out.push('no hay imágenes: falta 01.jpg (y 02.jpg… para un carrusel), o reel.mp4 para un reel');
   if (n > 10) out.push(`hay ${n} imágenes: un carrusel admite hasta 10`);
   post.images.forEach((f, i) => {
     if (f !== `${String(i + 1).padStart(2, '0')}.jpg`) out.push(`las imágenes van numeradas 01.jpg, 02.jpg… sin saltos (encontré ${f})`);
@@ -125,5 +146,17 @@ export function problems(post, { draft = false } = {}) {
     ratios.add(r.toFixed(2));
   }
   if (ratios.size > 1) out.push('todas las imágenes del carrusel tienen que tener la misma proporción');
+  return out;
+}
+
+function reelProblems(post) {
+  const out = [];
+  if (post.images.length) out.push('un reel va solo con reel.mp4 (y cover.jpg): sacá las imágenes 01.jpg…');
+  const file = join(post.dir, post.video);
+  const head = readFileSync(file).subarray(4, 8).toString('latin1');
+  if (head !== 'ftyp') out.push('reel.mp4 no es un video MP4');
+  const mb = statSync(file).size / 1024 / 1024;
+  if (mb > MAX_VIDEO_BYTES / 1024 / 1024) out.push(`reel.mp4 pesa ${mb.toFixed(1)} MB: tiene que pesar menos de 20 MB`);
+  if (post.cover && !jpegSize(readFileSync(join(post.dir, post.cover)))) out.push('cover.jpg no es un JPEG');
   return out;
 }
