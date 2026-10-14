@@ -1,0 +1,29 @@
+{
+  "publishAt": "2026-10-14T10:00:00-03:00",
+  "note": "Semana del estrés, 1 de 4. La última placa usa la foto de Rosario del post de agosto.",
+  "caption": "Casi nunca nos estresamos por una sola cosa.\n\nEs la suma. El mensaje que contestaste a las once de la noche, lo que te tragaste para no discutir. Cosas que, de a una, parecen poca cosa, y por eso las dejamos pasar.\n\nEl cuerpo, en cambio, va llevando la cuenta. Cuando avisa (un dolor de cabeza que no se va, la espalda dura al final del día) casi siempre hace rato que venía juntando.\n\nEn Gestalt trabajamos con el darse cuenta: notar lo que te pasa mientras te pasa. Parece poco. Es por donde se empieza.\n\nTe dejo una pregunta para esta noche: ¿qué fue lo que más te pesó hoy, y en qué parte del cuerpo lo sentiste?\n\nSi querés mirarlo con alguien, escribime por mensaje directo y coordinamos una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #estres #saludemocional #uruguay",
+  "slides": [
+    { "layout": "cover", "bg": "sage", "title": "Nadie se estresa\nde golpe.", "hand": "se va juntando de a poquito" },
+    { "kicker": "cómo empieza", "title": "Con cosas chicas.", "lines": [
+      "El mail que contestaste a las once de la noche.",
+      "El mate que se enfrió en la mesa porque saltó otra cosa.",
+      "El «después lo hablo» que nunca llegó.",
+      "Decir que sí cuando querías decir que no."
+    ], "art": [{ "x": 870, "y": 1010, "r": 34 }] },
+    { "layout": "big", "title": "Cada una, sola,\nno pesa nada.", "body": "Por eso las dejamos pasar. Y nadie, ni siquiera nosotros, se da cuenta de cuánto se está juntando.", "art": [{ "x": 790, "y": 930, "r": 80 }] },
+    { "kicker": "la bola de nieve", "title": "Rueda, y en cada vuelta se lleva un poco más.", "body": "Hasta que un martes cualquiera alguien te pregunta «¿todo bien?» y se te llenan los ojos de lágrimas sin saber bien por qué.", "art": [{ "x": 700, "y": 880, "r": 150 }] },
+    { "kicker": "y el cuerpo avisa", "lines": [
+      "Un dolor de cabeza que aparece siempre a la misma hora.",
+      "La espalda dura al final del día.",
+      "El estómago cerrado, o un hambre que no se calma con nada.",
+      "Dormir y levantarte sin descanso."
+    ], "hand": "muchas veces es lo primero que nos hace parar", "art": [{ "x": 640, "y": 1010, "r": 260 }] },
+    { "bg": "sage", "kicker": "en gestalt", "title": "Hablamos de\n*darse cuenta*.", "body": "Notar lo que te pasa en el momento en que te pasa: en el cuerpo, en lo que sentís, en lo que pensás.\n\nTodavía no hay que arreglar nada. Primero hay que verlo." },
+    { "layout": "note", "title": "Para esta noche", "hand": "antes de dormir", "steps": [
+      "Pensá en el momento del día que más te pesó.",
+      "Fijate en qué parte del cuerpo lo sentiste: los hombros, la panza, la garganta, la cabeza.",
+      "No hagas nada con eso. Alcanza con notarlo."
+    ] },
+    { "layout": "cta", "title": "Si la bola ya está grande, la podemos mirar con tiempo.", "body": "Escribime por mensaje directo y coordinamos una consulta de bienvenida.\n\nAtiendo en Uruguay y también online." }
+  ]
+}
