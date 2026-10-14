@@ -1,0 +1,68 @@
+{
+  "publishAt": "2026-10-16T10:00:00-03:00",
+  "note": "Versión 3: igual a la anterior pero sin citar a ningún autor (pedido de Sofía). El ejercicio es darle voz a la parte del cuerpo que duele.",
+  "caption": "¿Y si ese dolor tuviera algo para decirte?\n\nEn Gestalt entendemos a la persona como un todo. Lo que sentís y lo que pasa en tu cuerpo son parte de la misma experiencia, y por eso el cuerpo es una de las puertas por donde entramos en terapia.\n\nCuando algo duele, además de preguntarnos por qué, nos preguntamos cómo: cómo es ese dolor ahora, dónde está, qué hace cuando le prestás atención.\n\nDespués viene un ejercicio que usamos mucho en Gestalt: prestarle la voz a esa parte. Hablar como si fueras ese hombro o esa panza, en primera persona y en presente. A veces lo que aparece sorprende. Algo que estaba en el fondo pasa a ser figura, se ve, y lo que se ve se puede empezar a atender.\n\nEn las placas te dejo el ejercicio para que lo pruebes.\n\nUna aclaración: si un dolor es fuerte, nuevo o se repite, consultá primero con tu médico. Este trabajo va al lado de esa consulta, nunca en su lugar.\n\nSi querés hacerlo con compañía, escribime por mensaje directo y coordinamos una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #cuerpoyemociones #darsecuenta #aquiyahora",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "sage",
+      "title": "¿Y si ese dolor tuviera algo para decirte?",
+      "size": 108,
+      "hand": "un ejercicio de gestalt"
+    },
+    {
+      "kicker": "en gestalt",
+      "title": "Somos un todo.",
+      "body": "Lo que sentís y lo que pasa en tu cuerpo son parte de la misma experiencia.\n\nPor eso, cuando algo duele, además de preguntarnos *por qué*, nos preguntamos *cómo*."
+    },
+    {
+      "kicker": "aquí y ahora",
+      "title": "Primero, notarlo.",
+      "lines": [
+        "¿Dónde está, exactamente?",
+        "¿Aprieta, quema, pesa, tira?",
+        "¿Qué hace cuando le prestás atención: crece, se mueve, afloja?"
+      ],
+      "hand": "sin interpretar nada todavía"
+    },
+    {
+      "layout": "big",
+      "size": 84,
+      "title": "Después, le prestamos\nla voz.",
+      "body": "Hablar *como si* fueras esa parte del cuerpo. En primera persona, en presente.\n\nEs un ejercicio que usamos mucho en Gestalt."
+    },
+    {
+      "layout": "big",
+      "kicker": "por ejemplo",
+      "size": 66,
+      "title": "*«Soy tu hombro derecho. Estoy duro desde el lunes. Cargo con cosas que no le pediste a nadie que llevara con vos. Estoy cansado.»*"
+    },
+    {
+      "bg": "sage",
+      "kicker": "figura y fondo",
+      "title": "Lo que estaba atrás pasa adelante.",
+      "body": "En Gestalt decimos que algo pasa del *fondo* a la *figura*: de estar ahí sin que lo notemos, a ocupar el centro de la atención.\n\nY lo que se ve se puede empezar a atender."
+    },
+    {
+      "layout": "note",
+      "title": "Para probar hoy",
+      "hand": "cinco minutos",
+      "steps": [
+        "Elegí una parte del cuerpo que hoy te moleste.",
+        "Cerrá los ojos y describila, sin juzgarla.",
+        "Completá en voz alta: «Soy tu… y…». Dejá que la frase siga sola.",
+        "Al terminar, fijate qué sentís."
+      ]
+    },
+    {
+      "layout": "note",
+      "hand": "importante",
+      "body": "Si un dolor es fuerte, nuevo o se repite, consultá primero con tu médico.\n\nEste ejercicio va al lado de esa consulta, nunca en su lugar."
+    },
+    {
+      "layout": "cta",
+      "title": "En consulta hacemos este trabajo con tiempo y con compañía.",
+      "body": "Si querés probarlo, escribime por mensaje directo y coordinamos una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
