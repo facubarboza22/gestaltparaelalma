@@ -39,7 +39,8 @@ Suenan a texto generado o a folleto de bienestar. No van:
 - Cuando se habla de síntomas del cuerpo: siempre recordar que lo primero es consultar al médico si el dolor es fuerte, nuevo o se repite.
 - Nada de historias de pacientes, ni inventadas ni "basadas en".
 - Datos solo con fuente verificada (la lista está en `docs/investigacion/`). Si no hay fuente, no va el dato.
-- Citas de autores solo si están verificadas en una fuente primaria. Ejemplo: "Perder la cabeza y volver a los sentidos", que circula atribuida a Perls, **no tiene fuente**: no se usa.
+- **No citamos autores** (ni en placas ni en captions), salvo uno que Rosario haya avalado. Sofía lo pidió el 2026-10-14 al rechazar una placa que nombraba a Adriana Schnake. Los autores sirven para investigar (`docs/investigacion/`), no para mostrar. Autores avalados por Rosario: ninguno todavía.
+- Si Rosario avala una cita, además tiene que estar verificada en una fuente primaria. Ejemplo: "Perder la cabeza y volver a los sentidos", que circula atribuida a Perls, **no tiene fuente**: no se usa.
 
 ## Desde la Gestalt, siempre
 

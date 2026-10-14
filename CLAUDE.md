@@ -72,7 +72,8 @@ Gotchas learned there:
 - Every post is approved by Sofía before it's queued. Nothing auto-publishes without approval.
 - Write in Rioplatense Spanish (voseo), warm and simple, in the therapist's first person. No AI-sounding filler, no therapy jargon without explaining it.
 - Never diagnose, promise results or give medical advice. No patient stories or quotes. No before/after.
-- Attribute quotes correctly (e.g. Fritz Perls' "Gestalt prayer"); verify any quote or author before using it, never from memory alone.
+- Don't name or quote authors in posts unless Rosario approved that author (none yet; Sofía's call, 2026-10-14). Any approved quote still gets verified at a primary source, never from memory.
+- Every post speaks from Gestalt (an exercise or a Gestalt lens at its center); health data only supports it. Rules in `docs/escritura.md`.
 - For posts about anxiety, grief, depression or self-harm: gentle tone, and add that it's not a substitute for urgent help, with a crisis line for her country when relevant.
 - CTA: invite people to write by DM for a consulta de bienvenida. Never ask for a phone number publicly.
 
