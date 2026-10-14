@@ -41,6 +41,14 @@ Suenan a texto generado o a folleto de bienestar. No van:
 - Datos solo con fuente verificada (la lista está en `docs/investigacion/`). Si no hay fuente, no va el dato.
 - Citas de autores solo si están verificadas en una fuente primaria. Ejemplo: "Perder la cabeza y volver a los sentidos", que circula atribuida a Perls, **no tiene fuente**: no se usa.
 
+## Desde la Gestalt, siempre
+
+Sofía rechazó la primera versión de "El cuerpo habla" (2026-10-14) porque "no habla desde la gestalt": era una lista de síntomas con datos de la OMS, como una nota de revista de salud. Lo que aprendimos:
+
+- El centro de cada post es una mirada o un ejercicio gestáltico (darse cuenta, aquí y ahora, figura y fondo, ciclo de la experiencia, retroflexión, darle voz al síntoma, el "cómo" antes que el "por qué"). Los datos médicos, si van, acompañan; nunca son el tema.
+- Proponer experiencias para hacer ("probá esto"), no consejos ni explicaciones de manual.
+- Hablar en presente y en primera persona, como se trabaja en consulta.
+
 ## La invitación
 
 - Siempre la misma idea, con palabras que cambian: escribir por mensaje directo para coordinar una consulta de bienvenida. "Atiendo en Uruguay y también online."

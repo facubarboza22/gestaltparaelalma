@@ -12,6 +12,10 @@
  * caption.txt and post.json are written only the first time: after that they
  * belong to the review page, where Sofía edits them.
  *
+ * A reel can carry music: "music": { file, start?, gainDb? }, file relative to
+ * the repo (keep tracks in drafts/_assets/music: licensed downloads, not ours
+ * to redistribute; only the mixed reel.mp4 gets published).
+ *
  * Rosario's portrait for the last slide is drafts/_assets/rosario.jpg (local
  * only); without it the slide goes out without the photo.
  */
@@ -75,16 +79,22 @@ async function renderReel(dir, reel) {
   }
   await page.evaluate((r) => window.reel(r), reel);
 
-  // Frames go straight into ffmpeg. A silent audio track is included: some
-  // players treat a video without audio as broken.
+  // Frames go straight into ffmpeg. Without music a silent track is included:
+  // some players treat a video without audio as broken.
   const out = join(dir, 'reel.mp4');
+  const m = reel.music;
+  const audioIn = m
+    ? ['-ss', String(m.start ?? 0), '-i', join(ROOT, m.file)]
+    : ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=48000'];
+  const fadeOut = (reel.duration - 3).toFixed(2);
+  const audioFilter = m ? ['-af', `volume=${m.gainDb ?? 0}dB,afade=t=in:d=1.5,afade=t=out:st=${fadeOut}:d=3,aresample=48000`] : [];
   const ff = spawn('ffmpeg', [
     '-y', '-loglevel', 'error',
     '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
-    '-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=48000',
-    '-map', '0:v', '-map', '1:a', '-shortest',
+    ...audioIn,
+    '-map', '0:v', '-map', '1:a', ...audioFilter, '-t', String(reel.duration),
     '-c:v', 'libx264', '-profile:v', 'high', '-crf', '20', '-preset', 'medium', '-pix_fmt', 'yuv420p',
-    '-c:a', 'aac', '-b:a', '64k', '-movflags', '+faststart', out,
+    '-c:a', 'aac', '-b:a', m ? '160k' : '64k', '-movflags', '+faststart', out,
   ], { stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((ok, fail) => ff.on('close', (code) => (code === 0 ? ok() : fail(new Error(`ffmpeg exited ${code}`)))));
 
