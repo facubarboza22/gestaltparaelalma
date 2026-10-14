@@ -1,0 +1,24 @@
+{
+  "publishAt": "2026-10-21T10:00:00-03:00",
+  "note": "Semana del estrés, 4 de 4: frustración, trabajo y casa. Explica «retroflexión» en criollo.",
+  "caption": "¿Te pasó de explotar por una pavada? Una taza en la pileta, un comentario, la tele alta.\n\nLo de la taza casi siempre viene de antes. De la reunión donde no te dejaron terminar de hablar, de lo que te tragaste a las diez de la mañana para no armar lío. Lo que no sale en su momento queda guardado y busca salida donde puede, muchas veces con la gente que más queremos.\n\nEn Gestalt hay un nombre para esto: retroflexión. Lo que iba hacia afuera se vuelve hacia uno. Dicho en criollo, lo que no le dije al otro me lo termino haciendo a mí: la mandíbula apretada, la espalda cargada, el mal humor que se descarga en casa.\n\nLa frustración en sí no está mal. Aparece cuando algo que necesitás quedó a mitad de camino, y por eso vale la pena escucharla.\n\nLa próxima vez que sientas que vas a explotar, probá esto: los pies en el piso, el aire que sale despacio, y una pregunta. ¿Esto es con esta persona, o viene de antes?\n\nSi querés hacerle lugar a lo que venís guardando, escribime por mensaje directo y coordinamos una consulta de bienvenida. Atiendo en Uruguay y también online.\n\n#terapiagestalt #gestalt #estreslaboral #frustracion #saludemocional",
+  "slides": [
+    { "layout": "cover", "bg": "sage", "title": "Explotaste por una taza mal lavada.", "size": 112, "hand": "pero no era la taza" },
+    { "kicker": "era otra cosa", "lines": [
+      "La reunión en la que no te dejaron terminar de hablar.",
+      "El cambio de último momento que nadie te consultó.",
+      "Hacer todo lo que había que hacer, y que igual no alcance.",
+      "Las ganas de decir algo, y tragártelo."
+    ] },
+    { "layout": "big", "size": 84, "title": "Lo que no sale en su momento no desaparece.", "body": "Queda guardado. Y busca salida donde puede: en casa, con la gente que tenemos más cerca, que es con la que nos sentimos más seguros." },
+    { "kicker": "y al revés", "title": "La casa también viaja al trabajo.", "body": "Las cuentas, los chicos, cuidar a alguien de la familia, una pareja que no anda bien.\n\nEl cansancio se sube con vos al ómnibus a la mañana." },
+    { "bg": "sage", "kicker": "en gestalt", "title": "Esto tiene nombre: *retroflexión*.", "body": "Lo que iba hacia afuera (un reclamo, un «no») se vuelve hacia uno.\n\nDicho en criollo: lo que no le dije al otro, me lo termino haciendo a mí. Se aprieta la mandíbula. Se carga la espalda." },
+    { "kicker": "la frustración", "title": "Aparece cuando algo que necesitás queda a mitad de camino.", "body": "Que te escuchen. Descansar. Que alguien vea todo lo que hacés.\n\nMirala como una pista: ahí hay algo que te importa." },
+    { "layout": "note", "title": "Antes de explotar", "hand": "la próxima vez", "steps": [
+      "Apoyá los dos pies en el piso.",
+      "Soltá el aire despacio, una vez.",
+      "Preguntate: ¿esto es con esta persona, o viene de antes?"
+    ] },
+    { "layout": "cta", "title": "Lo que venís guardando se puede decir en otro lugar.", "body": "Escribime por mensaje directo y coordinamos una consulta de bienvenida.\n\nAtiendo en Uruguay y también online." }
+  ]
+}
