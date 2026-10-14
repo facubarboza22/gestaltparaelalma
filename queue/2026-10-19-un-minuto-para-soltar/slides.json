@@ -1,0 +1,77 @@
+{
+  "publishAt": "2026-10-19T19:00:00-03:00",
+  "note": "Semana del estrés, 3 de 4: el reel. Música: «Zen Breathing Space» de megisss (Pixabay). El círculo respira al ritmo de la música (ciclos de 12 segundos).",
+  "caption": "Un minuto. No hace falta más.\n\nMuchas veces el estrés se nos queda en el cuerpo sin que nos demos cuenta. Los hombros suben y la mandíbula se aprieta sin que lo decidamos, y así pasamos el día entero.\n\nEste ejercicio se puede hacer en cualquier lado: en el ómnibus, o un minuto antes de entrar a casa. El aire sale más despacio de lo que entra, y eso ayuda a que el cuerpo afloje.\n\nGuardalo y volvé a él cuando lo necesites.\n\nSi después de hacerlo notás que hay algo que pide más atención, escribime por mensaje directo y coordinamos una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #estres #respiracion #saludemocional",
+  "reel": {
+    "duration": 76,
+    "bg": "sage",
+    "cover": {
+      "bg": "sage",
+      "kicker": "una pausa",
+      "title": "Un minuto\npara soltar.",
+      "size": 128,
+      "hand": "hacelo ahora, donde estés"
+    },
+    "scenes": [
+      {
+        "from": 0,
+        "to": 6.5,
+        "title": "Si estás leyendo esto con los hombros arriba,",
+        "size": 100,
+        "hand": "bajalos.",
+        "handAt": 2.8
+      },
+      {
+        "from": 6.5,
+        "to": 12,
+        "title": "Ahora la mandíbula.",
+        "body": "Separá apenas los dientes. Dejá la lengua quieta."
+      },
+      {
+        "from": 12,
+        "to": 17.5,
+        "title": "Y la panza.",
+        "body": "No hace falta sostenerla. Dejala blanda."
+      },
+      {
+        "from": 17.5,
+        "to": 23.3,
+        "title": "Vamos a respirar tres veces.",
+        "size": 96,
+        "body": "El aire sale más despacio de lo que entra."
+      },
+      {
+        "from": 23.3,
+        "to": 62,
+        "breath": {
+          "cycles": 3,
+          "inhale": 5,
+          "exhale": 7,
+          "inWord": "tomá aire",
+          "outWord": "soltalo despacio"
+        }
+      },
+      {
+        "from": 62,
+        "to": 67.5,
+        "title": "¿Dónde lo estabas sosteniendo?",
+        "size": 104
+      },
+      {
+        "from": 67.5,
+        "to": 70,
+        "last": true,
+        "title": "El cuerpo lleva la cuenta de todo el día.",
+        "size": 92,
+        "body": "Si querés escucharlo con compañía, escribime por mensaje directo.",
+        "sign": true,
+        "handAt": 3
+      }
+    ],
+    "music": {
+      "file": "drafts/_assets/music/megisss-megis_zen-breathing-space-488255.mp3",
+      "start": 0,
+      "gainDb": -3
+    }
+  }
+}
