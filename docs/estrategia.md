@@ -6,13 +6,15 @@ Definida con Sofía el 2026-10-01. Es la guía para escribir los borradores de c
 
 Cada semana gira alrededor de un tema. Los posts no nombran el tema de forma literal: lo rodean, para que quien lo está viviendo se reconozca y sienta ganas de escribir.
 
-Temas para empezar (el orden se puede cambiar):
+Temas (el orden se puede cambiar):
 
-1. Depresión
-2. Duelo (todo tipo de duelo: una muerte, una separación, una mudanza, un trabajo, una etapa que termina)
+1. Estrés y el cuerpo (semana del 2026-10-14, publicada)
+2. Despedidas: duelos que no son por una muerte (semana del 2026-10-23). De lo más grande a lo más chico, para que cualquiera se reconozca: lo que termina en general, una pareja, la maternidad y los hijos que se van, la persona que uno fue.
 3. Relaciones de pareja
 4. Ansiedad
 5. …y así, sumando temas
+
+Depresión queda para más adelante: es un tema delicado y no se toca a la ligera (Facundo, 2026-10-21). Antes de hacerlo, se habla con Sofía y Rosario cómo encararlo.
 
 ## Cómo se escriben
 
@@ -35,6 +37,32 @@ Líneas de ayuda verificadas en gub.uy el 2026-10-01 (son las únicas que el pub
 ## Frecuencia
 
 Tres posts por semana: **lunes, miércoles y viernes**. La hora se elige en cada borrador (el publicador pasa cada dos horas, de 8 a 20).
+
+Además, **un reel por semana** con un ejercicio guiado (el círculo que respira y la misma música), un día aparte a las 19:00. En la primera semana el reel «Un minuto para soltar» llegó a 1959 cuentas, con 40 guardados y 39 compartidos. Los carruseles de esa misma semana llegaron a 338 y 660 cuentas, con 1 guardado cada uno (medido el 2026-10-21).
+
+## Cómo se arman los carruseles
+
+**Cinco placas, siempre** (Facundo, 2026-10-21: los de ocho placas aburrían):
+
+1. Portada: la frase que engancha, y una línea a mano.
+2. La escena: tres o cuatro frases cortas en las que la persona se reconoce.
+3. «En gestalt»: la mirada gestáltica en dos o tres oraciones.
+4. El ejercicio: tres pasos cortos.
+5. La invitación, con la foto y la firma de Rosario.
+
+Pocas palabras y las justas: si una frase se puede sacar sin que se pierda la idea, se saca. El texto del posteo también es corto (unos 700 caracteres antes de los hashtags). Los carruseles cortos llevan `"textSize": "large"` en `slides.json`, para que la letra llene la placa.
+
+## Colores: uno por tema, rotando
+
+Todos los colores salen de la misma paleta de la cuenta (salvia, verde oscuro, arcilla, durazno, papel). Lo que cambia de un tema a otro es qué color manda y cómo se arman las placas, para que dos semanas seguidas no se vean iguales. Cada borrador lo dice en `slides.json` con `"theme"`.
+
+| Paleta | Placas de color (portada, «en gestalt», reel) | Detalles (letra a mano, viñetas, firma) | Ritmo |
+|---|---|---|---|
+| **salvia** | verde salvia | arcilla | portada y «en gestalt» de color, el resto papel |
+| **arcilla** | arcilla | verde oscuro | además, la frase grande y el ejercicio van sobre durazno |
+| **bosque** | verde oscuro, sobre un papel más tostado | arcilla | a definir cuando toque |
+
+Rotación: estrés = salvia (2026-10-14), despedidas = arcilla (2026-10-23), el próximo tema = bosque, y después se vuelve a empezar.
 
 ## Imágenes
 

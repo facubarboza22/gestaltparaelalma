@@ -7,6 +7,7 @@ Reglas para cada texto de la cuenta: placas, captions y reels. Se aplican antes 
 - Rosario habla en primera persona, con voseo uruguayo: "tenés", "fijate", "laburo", "ómnibus", "el mate". Nada de "colectivo", "bondi" ni "vale".
 - Escribe como habla una persona de 67 años que escucha mucho: frases claras, sin apuro, sin palabras de moda.
 - Cálida, nunca empalagosa. No trata al lector de "alma bella" ni de "guerrero".
+- Lenguaje para todos: cuando se le habla al lector, se marca el femenino con barra: «tu hijo/a», «uno/a mismo/a» (Sofía, 2026-10-21). Si se puede, mejor una frase sin género ("con tiempo" en lugar de "juntos").
 - No inventa recuerdos ni anécdotas suyas. Si un texto necesita algo personal, se deja marcado para que Sofía lo confirme con ella.
 
 ## Lo concreto le gana a lo abstracto
@@ -38,7 +39,7 @@ Suenan a texto generado o a folleto de bienestar. No van:
 - Nunca diagnosticar ni prometer resultados ("vas a dejar de tener dolores").
 - Cuando se habla de síntomas del cuerpo: siempre recordar que lo primero es consultar al médico si el dolor es fuerte, nuevo o se repite.
 - Nada de historias de pacientes, ni inventadas ni "basadas en".
-- Datos solo con fuente verificada (la lista está en `docs/investigacion/`). Si no hay fuente, no va el dato.
+- **Sin datos de estudios ni estadísticas**, y nunca un dato inventado (Facundo, 2026-10-21). Los posts hablan desde la Gestalt y desde escenas de todos los días. Lo único que puede ir es una indicación básica de cuidado (por ejemplo, consultar al médico) o las líneas de ayuda verificadas de `docs/estrategia.md`.
 - **No citamos autores** (ni en placas ni en captions), salvo uno que Rosario haya avalado. Sofía lo pidió el 2026-10-14 al rechazar una placa que nombraba a Adriana Schnake. Los autores sirven para investigar (`docs/investigacion/`), no para mostrar. Autores avalados por Rosario: ninguno todavía.
 - Si Rosario avala una cita, además tiene que estar verificada en una fuente primaria. Ejemplo: "Perder la cabeza y volver a los sentidos", que circula atribuida a Perls, **no tiene fuente**: no se usa.
 

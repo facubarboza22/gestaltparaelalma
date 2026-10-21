@@ -6,6 +6,8 @@
  *
  * slides.json: { publishAt, note?, caption, slides: [...] } for a carousel, or
  * { publishAt, note?, caption, reel: { duration, scenes: [...], cover: {...} } }.
+ * Optional top-level "theme" (salvia, arcilla, bosque): the week's colour scheme;
+ * "textSize": "large" for the short 5-slide carousels.
  * Layouts and the look live in scripts/render/slide.html.
  *
  * Writes NN.jpg (1080×1350) or reel.mp4 + cover.jpg (1080×1920) next to it.
@@ -49,8 +51,8 @@ async function renderPost(dir) {
   if (!existsSync(join(dir, 'post.json'))) writeFileSync(join(dir, 'post.json'), JSON.stringify({ publishAt: spec.publishAt, ...(spec.note ? { note: spec.note } : {}) }, null, 2) + '\n');
   for (const f of readdirSync(dir)) if (/^\d{2}\.jpg$|^reel\.mp4$|^cover\.jpg$/.test(f)) rmSync(join(dir, f));
 
-  if (spec.reel) await renderReel(dir, spec.reel);
-  else await renderSlides(dir, spec.slides);
+  if (spec.reel) await renderReel(dir, { theme: spec.theme, ...spec.reel });
+  else await renderSlides(dir, spec.slides, spec.theme, spec.textSize);
 }
 
 async function newPage(width, height) {
@@ -59,9 +61,9 @@ async function newPage(width, height) {
   return page;
 }
 
-async function renderSlides(dir, slides) {
+async function renderSlides(dir, slides, theme, textSize) {
   const page = await newPage(1080, 1350);
-  const ctx = { total: slides.length, portrait: existsSync(PORTRAIT) ? pathToFileURL(PORTRAIT).href : null };
+  const ctx = { theme, textSize, total: slides.length, portrait: existsSync(PORTRAIT) ? pathToFileURL(PORTRAIT).href : null };
   for (const [i, slide] of slides.entries()) {
     await page.evaluate(([s, c]) => window.paint(s, c), [{ ...slide, n: i + 1 }, ctx]);
     await page.screenshot({ path: join(dir, `${String(i + 1).padStart(2, '0')}.jpg`), type: 'jpeg', quality: 92 });
@@ -73,7 +75,7 @@ async function renderSlides(dir, slides) {
 async function renderReel(dir, reel) {
   const page = await newPage(1080, 1920);
   if (reel.cover) {
-    await page.evaluate((s) => window.reel({ bg: s.bg, scenes: [{ ...s, from: -10, to: 10, last: true, handAt: -10 }] }), reel.cover);
+    await page.evaluate((s) => window.reel({ theme: s.theme, bg: s.bg, scenes: [{ ...s, from: -10, to: 10, last: true, handAt: -10 }] }), { theme: reel.theme, ...reel.cover });
     await page.evaluate(() => window.seek(5));
     await page.screenshot({ path: join(dir, 'cover.jpg'), type: 'jpeg', quality: 92 });
   }
