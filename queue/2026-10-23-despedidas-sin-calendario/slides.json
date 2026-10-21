@@ -1,0 +1,48 @@
+{
+  "theme": "arcilla",
+  "textSize": "large",
+  "publishAt": "2026-10-23T10:00:00-03:00",
+  "note": "Semana de las despedidas (duelos que no son por una muerte), 1 de 4: la mirada general. Sin datos ni autores. La palabra «duelo» va solo en los hashtags. La nota de la Línea Vida al final del texto la pide la estrategia para estas semanas: si te parece mucho, se borra.",
+  "caption": "Hay despedidas que nadie anota en el calendario: una pareja, una casa, un trabajo, una amistad que se fue apagando.\n\nEn Gestalt decimos que lo que no se despide queda abierto y sigue pidiendo atención.\n\nPara esta semana: anotá lo que terminó en tu vida estos años y fijate cuál te hace un nudo en el cuerpo. Esa todavía pide despedida.\n\nSi querés hacerla con compañía, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estás pasando un momento muy difícil, no esperes: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #duelo #despedidas #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Hay despedidas que nadie anota en el calendario.",
+      "size": 108,
+      "hand": "y duelen igual"
+    },
+    {
+      "kicker": "algunas",
+      "lines": [
+        "La pareja que terminó.",
+        "La casa que vendiste.",
+        "El trabajo de toda la vida.",
+        "La amiga con la que ya no hablás."
+      ],
+      "hand": "aunque lo hayas elegido vos"
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Lo que no se despide *queda abierto*.",
+      "body": "Y sigue pidiendo atención: en una canción que te desarma, o en un enojo que no sabés de dónde viene."
+    },
+    {
+      "layout": "note",
+      "bg": "soft",
+      "title": "Para esta semana",
+      "hand": "con papel y lápiz",
+      "steps": [
+        "Anotá lo que terminó en tu vida estos años.",
+        "Fijate cuál te hace un nudo en el cuerpo.",
+        "Esa todavía pide despedida."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si una despedida te quedó a medias, la podemos hacer con tiempo.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
