@@ -1,0 +1,47 @@
+{
+  "theme": "arcilla",
+  "textSize": "large",
+  "publishAt": "2026-10-28T10:00:00-03:00",
+  "note": "Semana de las despedidas, 3 de 4: la maternidad (la vida de antes, y años después, cuando los hijos/as se van de casa). Explica «polaridades». Sin datos ni autores.",
+  "caption": "Amás a tu hijo/a. Y extrañás tu vida de antes: el café caliente, salir sin mirar la hora. Años después llega otra despedida, la del día que se van de casa.\n\nExtrañar no te hace peor madre. En Gestalt hablamos de polaridades: querer y extrañar conviven, y cuando escondemos una, pesa más.\n\nPara probar: completá «Extraño…» y «Y también…». Leelas juntas. Las dos son tuyas.\n\nSi hay algo de esto que no le podés contar a nadie, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estás pasando un momento muy difícil, no esperes: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #maternidad #duelo #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Amás a tu hijo/a.\nY extrañás tu vida de antes.",
+      "size": 104,
+      "hand": "las dos cosas pueden ser verdad"
+    },
+    {
+      "kicker": "de lo que casi no se habla",
+      "lines": [
+        "Un café caliente, entero.",
+        "Salir sin mirar la hora.",
+        "Ser algo más que «la mamá de».",
+        "Y un día, la pieza vacía cuando se van."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Las *dos cosas* a la vez.",
+      "body": "Querer y extrañar conviven. Extrañar no te hace peor madre.\n\nLe decimos polaridades: cuando escondemos una de las dos, pesa más."
+    },
+    {
+      "layout": "note",
+      "bg": "soft",
+      "title": "Completá las frases",
+      "hand": "para probar",
+      "steps": [
+        "«Extraño…»",
+        "«Y también…»",
+        "Leelas juntas. Las dos son tuyas."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si hay algo de esto que no le podés contar a nadie, a mí me lo podés escribir.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
