@@ -1,0 +1,87 @@
+{
+  "theme": "arcilla",
+  "publishAt": "2026-10-27T19:00:00-03:00",
+  "note": "Semana de las despedidas, el reel (martes, un día extra porque el reel de la semana pasada fue el que mejor anduvo). Mismo formato y misma música que «Un minuto para soltar», con el círculo que respira al mismo ritmo. Ejercicio: notar en el cuerpo algo que terminó, respirar, y agradecerle. Sin datos ni autores.",
+  "caption": "Un minuto para despedirte de algo que terminó.\n\nPuede ser grande o chico: una pareja, una casa, un trabajo, una etapa. Muchas veces seguimos adelante sin despedirnos, y lo que terminó se queda con nosotros en el cuerpo, como un nudo en el pecho o en la garganta.\n\nEn Gestalt decimos que toda experiencia necesita un cierre. Este ejercicio es una forma chiquita de empezar: notar dónde lo sentís y agradecer lo que fue.\n\nGuardalo para cuando lo necesites. Si te remueve mucho, hacelo con compañía.\n\nSi querés despedirte con tiempo, escribime por mensaje directo y coordinamos una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estás pasando un momento muy difícil, no esperes: en Uruguay, la Línea Vida es gratuita y atiende las 24 horas (0800 0767 o *0767). Si estás en otro país, buscá la línea de ayuda de tu país o la guardia más cercana.\n\n#terapiagestalt #gestalt #duelo #despedidas #respiracion",
+  "reel": {
+    "duration": 84,
+    "bg": "strong",
+    "cover": {
+      "bg": "strong",
+      "kicker": "una pausa",
+      "title": "Un minuto\npara despedirte.",
+      "size": 120,
+      "hand": "de algo que terminó"
+    },
+    "scenes": [
+      {
+        "from": 0,
+        "to": 6.5,
+        "title": "Pensá en algo que terminó.",
+        "size": 104,
+        "hand": "no tiene que ser lo más grande",
+        "handAt": 2.6
+      },
+      {
+        "from": 6.5,
+        "to": 12,
+        "title": "¿Dónde lo sentís en el cuerpo?",
+        "body": "Puede ser el pecho, o la garganta. Quedate ahí un momento."
+      },
+      {
+        "from": 12,
+        "to": 17.5,
+        "title": "No hace falta cambiar nada.",
+        "body": "Alcanza con notarlo."
+      },
+      {
+        "from": 17.5,
+        "to": 23.3,
+        "title": "Vamos a respirar tres veces.",
+        "size": 96,
+        "body": "Con cada aire que sale, aflojá un poco."
+      },
+      {
+        "from": 23.3,
+        "to": 62,
+        "breath": {
+          "cycles": 3,
+          "inhale": 5,
+          "exhale": 7,
+          "inWord": "tomá aire",
+          "outWord": "soltalo despacio"
+        }
+      },
+      {
+        "from": 62,
+        "to": 68.5,
+        "title": "Ahora decile, en voz baja:",
+        "size": 100,
+        "hand": "gracias por lo que fue.",
+        "handAt": 2.4
+      },
+      {
+        "from": 68.5,
+        "to": 74.5,
+        "title": "Fijate qué te llevás de eso.",
+        "size": 100,
+        "body": "Y qué podés dejar acá."
+      },
+      {
+        "from": 74.5,
+        "to": 84,
+        "last": true,
+        "title": "Despedirse también lleva su tiempo.",
+        "size": 92,
+        "body": "Si querés hacerlo con compañía, escribime por mensaje directo.",
+        "sign": true,
+        "handAt": 3
+      }
+    ],
+    "music": {
+      "file": "drafts/_assets/music/megisss-megis_zen-breathing-space-488255.mp3",
+      "start": 0,
+      "gainDb": -3
+    }
+  }
+}
