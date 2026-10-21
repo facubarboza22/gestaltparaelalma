@@ -1,0 +1,47 @@
+{
+  "theme": "arcilla",
+  "textSize": "large",
+  "publishAt": "2026-10-30T10:00:00-03:00",
+  "note": "Semana de las despedidas, 4 de 4: despedirse de quien uno fue. Aquí y ahora, y un ejercicio con una foto vieja (una silla vacía adaptada). Sin datos ni autores.",
+  "caption": "A veces también hay que despedirse de uno/a mismo/a: de los planes de los veinte, del cuerpo que corría sin pensarlo.\n\nEn Gestalt trabajamos en el aquí y ahora. Desde el presente se puede mirar el pasado con cariño y dejarlo en su lugar, eligiendo qué te llevás.\n\nPara probar: buscá una foto tuya de hace años y hablale en voz alta. Contale cómo estás hoy, y decile qué le agradecés y qué le devolvés.\n\nSi te cuesta encontrarte en quien sos hoy, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estás pasando un momento muy difícil, no esperes: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #duelo #aquiyahora #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "A veces también hay que despedirse de uno/a mismo/a.",
+      "size": 104,
+      "hand": "de quien eras antes"
+    },
+    {
+      "kicker": "algunas versiones",
+      "lines": [
+        "Los planes de los veinte.",
+        "El cuerpo que corría sin pensarlo.",
+        "La carrera que quedó por la mitad.",
+        "Esa risa que se fue apagando."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Volver al\n*aquí y ahora*.",
+      "body": "Desde el presente se puede mirar el pasado con cariño y dejarlo en su lugar.\n\nAl despedirte, elegís qué te llevás."
+    },
+    {
+      "layout": "note",
+      "bg": "soft",
+      "title": "Con una foto vieja",
+      "hand": "para probar",
+      "steps": [
+        "Buscá una foto tuya de hace años.",
+        "Hablale en voz alta. Contale cómo estás hoy.",
+        "Decile qué le agradecés y qué le devolvés."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si te cuesta reconocerte hoy, lo miramos con tiempo.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
