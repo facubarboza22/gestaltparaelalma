@@ -10,7 +10,9 @@
  * "textSize": "large" for the short 5-slide carousels.
  * Layouts and the look live in scripts/render/slide.html.
  *
- * Writes NN.jpg (1080×1350) or reel.mp4 + cover.jpg (1080×1920) next to it.
+ * Writes NN.jpg (1080×1350) or reel.mp4 + cover.jpg (1080×1920) next to it,
+ * made to Instagram's specs (scripts/lib/instagram.mjs): the reel is checked
+ * with ffprobe after encoding and the render fails if Instagram would refuse it.
  * caption.txt and post.json are written only the first time: after that they
  * belong to the review page, where Sofía edits them.
  *
@@ -21,16 +23,17 @@
  * Rosario's portrait for the last slide is drafts/_assets/rosario.jpg (local
  * only); without it the slide goes out without the photo.
  */
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
+import { REEL, reelEncodeArgs, reelFileProblems } from './lib/instagram.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const PAGE = pathToFileURL(join(ROOT, 'scripts', 'render', 'slide.html')).href;
 const PORTRAIT = join(ROOT, 'drafts', '_assets', 'rosario.jpg');
-const FPS = 30;
+const FPS = REEL.fps;
 
 const dirs = process.argv.slice(2).filter((d) => existsSync(join(d, 'slides.json')));
 if (!dirs.length) {
@@ -95,8 +98,9 @@ async function renderReel(dir, reel) {
     '-f', 'image2pipe', '-framerate', String(FPS), '-c:v', 'mjpeg', '-i', '-',
     ...audioIn,
     '-map', '0:v', '-map', '1:a', ...audioFilter, '-t', String(reel.duration),
-    '-c:v', 'libx264', '-profile:v', 'high', '-crf', '20', '-preset', 'medium', '-pix_fmt', 'yuv420p',
-    '-c:a', 'aac', '-b:a', m ? '160k' : '64k', '-movflags', '+faststart', out,
+    // Screenshots are full-range JPEG; phones expect standard-range video.
+    '-vf', 'scale=in_range=full:out_range=tv,format=yuv420p',
+    ...reelEncodeArgs(reel.duration), out,
   ], { stdio: ['pipe', 'inherit', 'inherit'] });
   const done = new Promise((ok, fail) => ff.on('close', (code) => (code === 0 ? ok() : fail(new Error(`ffmpeg exited ${code}`)))));
 
@@ -109,5 +113,9 @@ async function renderReel(dir, reel) {
   ff.stdin.end();
   await done;
   await page.close();
-  console.log(`✓ ${dir.replace(ROOT, '')}: reel ${reel.duration}s`);
+  const probe = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-print_format', 'json', '-show_streams', '-show_format', out], { encoding: 'utf8' }));
+  const problems = reelFileProblems(probe);
+  if (problems.length) throw new Error(`reel.mp4 no sirve para Instagram: ${problems.join('; ')}`);
+  const mb = (Number(probe.format.size) / 1024 / 1024).toFixed(1);
+  console.log(`✓ ${dir.replace(ROOT, '')}: reel ${reel.duration}s, ${mb} MB`);
 }

@@ -10,6 +10,7 @@
  */
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { basename, join } from 'node:path';
+import { MAX_IMAGE_BYTES, MAX_REEL_BYTES, REEL, mp4Boxes } from './instagram.mjs';
 
 export const REPO = 'facubarboza22/gestaltparaelalma';
 export const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main`;
@@ -19,7 +20,7 @@ export const RAW_BASE = `https://raw.githubusercontent.com/${REPO}/main`;
  * only serves GitHub files up to 20 MB.
  */
 export const cdnBase = (sha) => `https://cdn.jsdelivr.net/gh/${REPO}@${sha}`;
-export const MAX_VIDEO_BYTES = 20 * 1024 * 1024;
+export const MAX_VIDEO_BYTES = MAX_REEL_BYTES;
 export const MAX_ATTEMPTS = 3;
 
 const FOLDER = /^\d{4}-\d{2}-\d{2}-[a-z0-9-]+$/;
@@ -136,6 +137,7 @@ export function problems(post, { draft = false } = {}) {
   });
   const ratios = new Set();
   for (const f of post.images) {
+    if (statSync(join(post.dir, f)).size > MAX_IMAGE_BYTES) out.push(`${f} pesa más de 8 MB`);
     const size = jpegSize(readFileSync(join(post.dir, f)));
     if (!size) {
       out.push(`${f} no es un JPEG`);
@@ -153,10 +155,17 @@ function reelProblems(post) {
   const out = [];
   if (post.images.length) out.push('un reel va solo con reel.mp4 (y cover.jpg): sacá las imágenes 01.jpg…');
   const file = join(post.dir, post.video);
-  const head = readFileSync(file).subarray(4, 8).toString('latin1');
-  if (head !== 'ftyp') out.push('reel.mp4 no es un video MP4');
+  const boxes = mp4Boxes(readFileSync(file));
+  if (boxes[0] !== 'ftyp') out.push('reel.mp4 no es un video MP4');
+  // Instagram reads the index (moov) before the frames (mdat): ffmpeg -movflags +faststart.
+  else if (!boxes.includes('moov') || (boxes.includes('mdat') && boxes.indexOf('moov') > boxes.indexOf('mdat'))) out.push('reel.mp4 no está preparado para streaming: el índice (moov) tiene que ir antes que el video (render con -movflags +faststart)');
   const mb = statSync(file).size / 1024 / 1024;
   if (mb > MAX_VIDEO_BYTES / 1024 / 1024) out.push(`reel.mp4 pesa ${mb.toFixed(1)} MB: tiene que pesar menos de 20 MB`);
-  if (post.cover && !jpegSize(readFileSync(join(post.dir, post.cover)))) out.push('cover.jpg no es un JPEG');
+  if (post.cover) {
+    const size = jpegSize(readFileSync(join(post.dir, post.cover)));
+    if (!size) out.push('cover.jpg no es un JPEG');
+    else if (size.width !== REEL.width || size.height !== REEL.height) out.push(`cover.jpg mide ${size.width}×${size.height}: tiene que ser ${REEL.width}×${REEL.height}`);
+    if (statSync(join(post.dir, post.cover)).size > MAX_IMAGE_BYTES) out.push('cover.jpg pesa más de 8 MB');
+  }
   return out;
 }

@@ -94,9 +94,12 @@ test('loadQueue sorts by publish time and ignores loose files', () => {
   assert.deepEqual(loadQueue(root).map((p) => p.name), ['2026-10-06-sooner', '2026-10-08-later']);
 });
 
+/** An MP4 made of empty top-level boxes, in this order. */
+const fakeMp4 = (...types) => Buffer.concat(types.map((t) => Buffer.concat([Buffer.from([0, 0, 0, 16]), Buffer.from(t), Buffer.alloc(8)])));
+
 test('a reel folder: reel.mp4 (+ cover.jpg), no slides, under 20 MB', () => {
   const root = tmp();
-  const mp4 = Buffer.concat([Buffer.from([0, 0, 0, 0x18]), Buffer.from('ftypmp42'), Buffer.alloc(16)]);
+  const mp4 = fakeMp4('ftyp', 'moov', 'mdat');
   const ok = makePost(root, '2026-10-19-pausa', { images: { 'cover.jpg': [1080, 1920] } });
   writeFileSync(join(ok.dir, 'reel.mp4'), mp4);
   rmSync(join(ok.dir, '01.jpg'), { force: true });
@@ -113,4 +116,14 @@ test('a reel folder: reel.mp4 (+ cover.jpg), no slides, under 20 MB', () => {
   const fake = makePost(root, '2026-10-19-falso', { images: {} });
   writeFileSync(join(fake.dir, 'reel.mp4'), 'not a video');
   assert.match(problems(loadPost(join(root, 'queue'), '2026-10-19-falso')).join(), /no es un video/);
+});
+
+test('a reel must stream (moov first) and its cover is 1080×1920', () => {
+  const root = tmp();
+  const late = makePost(root, '2026-10-20-lento', { images: { 'cover.jpg': [1080, 1350] } });
+  rmSync(join(late.dir, '01.jpg'), { force: true });
+  writeFileSync(join(late.dir, 'reel.mp4'), fakeMp4('ftyp', 'mdat', 'moov'));
+  const found = problems(loadPost(join(root, 'queue'), '2026-10-20-lento')).join('\n');
+  assert.match(found, /streaming/);
+  assert.match(found, /cover\.jpg mide 1080×1350/);
 });
