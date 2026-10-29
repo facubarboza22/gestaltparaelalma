@@ -65,6 +65,7 @@ That one runs on Vercel + Firestore because it's part of a website. This repo ha
 Gotchas learned there:
 - GitHub scheduled workflows are unreliable (runs skipped or hours late). Publish whatever is overdue.
 - Reels: the video container can stay IN_PROGRESS for minutes; poll status before `media_publish`.
+- Reels: jsDelivr only fetches a file from GitHub the first time someone asks for it at that commit, and Instagram gives up if that first fetch is slow (nicolas-scapusio copy, 16 MB reel, 2026-10-29: "Video download failed with: HTTP error code 504"). `publishPost` downloads the video once itself (`warmUp`) before creating the REELS container.
 - Instagram allows a limited number of API posts per 24 h (check `content_publishing_limit`).
 - Never print tokens. When appending to `.env`, make sure the previous line ends with a newline.
 

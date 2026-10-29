@@ -57,6 +57,24 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const writeJson = (p, data) => writeFileSync(p, JSON.stringify(data, null, 2) + '\n');
 const day = (ms) => new Date(ms).toISOString().slice(0, 10);
 
+/**
+ * jsDelivr fetches a file from GitHub the first time someone asks for it at a
+ * given commit, and Instagram gave up on a cold 16 MB reel in the copy of this
+ * repo ("Video download failed with: HTTP error code 504", 2026-10-29).
+ * Download it once ourselves so it is in jsDelivr's cache before Instagram asks.
+ */
+async function warmUp(url, tries = 4) {
+  for (let i = 1; ; i++) {
+    const res = await fetch(url, { signal: AbortSignal.timeout(120_000) }).catch((e) => ({ ok: false, status: e.name }));
+    if (res.ok && (res.headers.get('content-type') ?? '').startsWith('video/')) {
+      await res.arrayBuffer();
+      return;
+    }
+    if (i >= tries) throw new Error(`jsDelivr didn't serve the video (${res.status}): ${url}`);
+    await sleep(10_000 * i);
+  }
+}
+
 /** Images are ready in seconds; a Reel's video can stay IN_PROGRESS for minutes. */
 async function waitFinished(id, minutes = 3) {
   for (let i = 0; i < minutes * 20; i++) {
@@ -90,7 +108,9 @@ async function publishPost(post) {
   if (post.video) {
     // The checked-out commit contains the approved reel (it was pushed before it was due).
     const sha = process.env.GITHUB_SHA || spawnSync('git', ['rev-parse', 'HEAD'], { cwd: ROOT, encoding: 'utf8' }).stdout.trim();
-    const params = { media_type: 'REELS', video_url: `${cdnBase(sha)}/${post.path}/${post.video}`, caption: post.caption, share_to_feed: 'true' };
+    const videoUrl = `${cdnBase(sha)}/${post.path}/${post.video}`;
+    await warmUp(videoUrl);
+    const params = { media_type: 'REELS', video_url: videoUrl, caption: post.caption, share_to_feed: 'true' };
     if (post.cover) params.cover_url = `${RAW_BASE}/${post.path}/${post.cover}`;
     creationId = (await call(`/${igId}/media`, { method: 'POST', params })).id;
     await waitFinished(creationId, 8);
