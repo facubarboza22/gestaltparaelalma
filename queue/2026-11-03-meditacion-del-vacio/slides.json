@@ -1,0 +1,87 @@
+{
+  "theme": "bosque",
+  "publishAt": "2026-11-03T19:00:00-03:00",
+  "note": "Semana del vacío, el reel: una meditación guiada de 84 segundos. Mismo formato y música que los reels anteriores (el círculo respira al ritmo de la música), con fondo verde oscuro. Propone quedarse en la pausa que hay cuando el aire termina de salir, sin llenarla. Sin datos ni autores.",
+  "caption": "Un minuto para estar con el vacío, sin taparlo.\n\nA veces el vacío asusta y lo llenamos rápido. Esta meditación te invita a quedarte un momento en él: en la pausa que hay cuando el aire termina de salir.\n\nEn Gestalt decimos que en ese vacío, si le damos tiempo, puede empezar a asomar lo nuevo.\n\nGuardala para los días en que no tenés ganas de nada.\n\nSi querés mirarlo con compañía, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi ese vacío pesa todos los días, no lo cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #meditacion #vacio #respiracion",
+  "reel": {
+    "duration": 84,
+    "bg": "strong",
+    "cover": {
+      "bg": "strong",
+      "kicker": "meditación guiada",
+      "title": "Un minuto\npara estar con el vacío.",
+      "size": 112,
+      "hand": "sin taparlo"
+    },
+    "scenes": [
+      {
+        "from": 0,
+        "to": 6.5,
+        "title": "Tomate un minuto para vos.",
+        "size": 104,
+        "hand": "donde estés",
+        "handAt": 2.6
+      },
+      {
+        "from": 6.5,
+        "to": 12,
+        "title": "Cerrá los ojos, o bajá la mirada.",
+        "body": "Apoyá los pies en el piso."
+      },
+      {
+        "from": 12,
+        "to": 17.5,
+        "title": "Mirá el aire que entra y sale.",
+        "body": "No lo cambies. Solo miralo."
+      },
+      {
+        "from": 17.5,
+        "to": 23.3,
+        "title": "Cuando el aire termina de salir, hay una pausa.",
+        "size": 92,
+        "body": "Un vacío chiquito. Quedate ahí un instante."
+      },
+      {
+        "from": 23.3,
+        "to": 62,
+        "breath": {
+          "cycles": 3,
+          "inhale": 5,
+          "exhale": 7,
+          "inWord": "tomá aire",
+          "outWord": "soltalo despacio"
+        }
+      },
+      {
+        "from": 62,
+        "to": 68.5,
+        "title": "Ese vacío no hay que llenarlo.",
+        "size": 100,
+        "hand": "alcanza con estar ahí",
+        "handAt": 2.4
+      },
+      {
+        "from": 68.5,
+        "to": 74.5,
+        "title": "¿Qué aparece cuando no hacés nada?",
+        "size": 100,
+        "body": "Una sensación, o un deseo chiquito."
+      },
+      {
+        "from": 74.5,
+        "to": 84,
+        "last": true,
+        "title": "Abrí los ojos despacio.",
+        "size": 96,
+        "body": "Si querés seguir mirándolo con compañía, escribime por mensaje directo.",
+        "sign": true,
+        "handAt": 3
+      }
+    ],
+    "music": {
+      "file": "drafts/_assets/music/megisss-megis_zen-breathing-space-488255.mp3",
+      "start": 0,
+      "gainDb": -3
+    }
+  }
+}
