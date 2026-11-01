@@ -1,0 +1,47 @@
+{
+  "theme": "bosque",
+  "textSize": "large",
+  "publishAt": "2026-11-02T10:00:00-03:00",
+  "note": "Semana del vacío (1 de 3: la mirada general). Paleta «bosque». Sin datos ni autores; el concepto central es el «vacío fértil», explicado sin nombrar a nadie. Tema cercano al desánimo: tono suave y Línea Vida al final del texto.",
+  "caption": "Hay días en los que no tenés ganas de nada, y no sabés bien por qué. Mirás el celular sin buscar nada, o estás con gente querida y te sentís lejos.\n\nEn Gestalt pensamos que cuando algo se cierra, lo nuevo no aparece enseguida. Ese tiempo del medio se siente como un hueco. Le decimos vacío fértil: si no lo tapamos a la fuerza, ahí puede empezar a asomar lo que necesitamos.\n\nPara esta semana: cuando aparezca el vacío, no lo tapes enseguida. Fijate dónde lo sentís en el cuerpo y preguntate qué te falta ahora.\n\nSi el vacío te acompaña hace tiempo, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi ese vacío pesa todos los días, no lo cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #vacio #saludemocional #aquiyahora",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Hay días en los que no tenés ganas de nada.",
+      "size": 108,
+      "hand": "y no sabés bien por qué"
+    },
+    {
+      "bg": "soft",
+      "kicker": "se parece a esto",
+      "lines": [
+        "Mirar el celular sin buscar nada.",
+        "Estar con amigos/as y sentirte lejos.",
+        "Que nada te entusiasme como antes.",
+        "No saber para dónde ir."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Entre una cosa y otra, *un hueco*.",
+      "body": "Cuando algo se cierra, lo nuevo no aparece enseguida.\n\nLe decimos vacío fértil: si no lo tapamos a la fuerza, ahí puede empezar a asomar lo que necesitamos."
+    },
+    {
+      "layout": "note",
+      "title": "Para esta semana",
+      "hand": "sin apuro",
+      "steps": [
+        "Cuando aparezca el vacío, no lo tapes enseguida.",
+        "Fijate dónde lo sentís: el pecho, la panza.",
+        "Preguntate: ¿qué me falta ahora?"
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si el vacío te acompaña hace tiempo, lo podemos mirar con calma.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
