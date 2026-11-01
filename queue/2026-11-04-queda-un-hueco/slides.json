@@ -1,0 +1,47 @@
+{
+  "theme": "bosque",
+  "textSize": "large",
+  "publishAt": "2026-11-04T10:00:00-03:00",
+  "note": "Semana del vacío (2 de 3: el vacío cuando algo se va (separación, hijos/as que se van, fin del liceo, jubilación)). Paleta «bosque». Sin datos ni autores; el concepto central es el «vacío fértil», explicado sin nombrar a nadie. Tema cercano al desánimo: tono suave y Línea Vida al final del texto.",
+  "caption": "Cuando algo se termina, queda un hueco, aunque haya sido para bien. Después de una separación, el primer lunes con la pieza de tus hijos/as vacía, al terminar el liceo, el día después de jubilarte.\n\nMuchas veces tapamos ese hueco rápido, con algo nuevo, para no sentirlo. En Gestalt invitamos a quedarse un rato ahí, sin escaparse. Eso le deja lugar a lo que de verdad necesitás.\n\nPara probar: cinco minutos en el lugar donde más se nota la ausencia, sin hacer nada. Anotá lo primero que aparezca.\n\nSi querés mirarlo con compañía, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online.\n\nSi ese vacío pesa todos los días, no lo cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #vacio #nidovacio #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Se terminó algo,\ny quedó un hueco.",
+      "size": 112,
+      "hand": "aunque haya sido para bien"
+    },
+    {
+      "bg": "soft",
+      "kicker": "a veces aparece",
+      "lines": [
+        "Después de una separación, al cerrar la puerta.",
+        "El primer lunes con la pieza de tus hijos/as vacía.",
+        "Al terminar el liceo, sin saber qué sigue.",
+        "El día después de jubilarte."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "No te apures\n*a llenarlo*.",
+      "body": "Muchas veces tapamos el hueco con algo nuevo, rápido, para no sentirlo.\n\nQuedarse un rato ahí, sin escaparse, le deja lugar a lo que de verdad necesitás."
+    },
+    {
+      "layout": "note",
+      "title": "Cinco minutos",
+      "hand": "para probar",
+      "steps": [
+        "Sentate donde más se nota la ausencia.",
+        "No hagas nada. Mirá, escuchá, respirá.",
+        "Anotá lo primero que aparezca, aunque sea chiquito."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Los huecos grandes se miran mejor con compañía.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
