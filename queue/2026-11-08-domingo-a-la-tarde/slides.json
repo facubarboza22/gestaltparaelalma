@@ -1,0 +1,47 @@
+{
+  "theme": "bosque",
+  "textSize": "large",
+  "publishAt": "2026-11-06T10:00:00-03:00",
+  "note": "Semana del vacío (3 de 3: el vacío chiquito de todos los días). Paleta «bosque». Sin datos ni autores; el concepto central es el «vacío fértil», explicado sin nombrar a nadie. Tema cercano al desánimo: tono suave y Línea Vida al final del texto.",
+  "caption": "Domingo a la tarde, la tele apagada y la casa callada. O justo después de lograr algo que esperabas hace meses.\n\nHay un vacío chiquito, de todos los días, que casi siempre tapamos sin darnos cuenta: con el celular o con la heladera.\n\nEn Gestalt trabajamos con el darse cuenta: notar lo que te pasa mientras te pasa. Recién ahí podés elegir qué hacer con eso.\n\nPara probar: la próxima vez que agarres el celular sin pensar, dejalo boca abajo, respirá una vez y preguntate qué estás sintiendo.\n\nSi ese vacío vuelve una y otra vez, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi ese vacío pesa todos los días, no lo cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #vacio #darsecuenta #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Domingo a la tarde.\nY ese vacío raro.",
+      "size": 112,
+      "hand": "que no sabés de dónde viene"
+    },
+    {
+      "bg": "soft",
+      "kicker": "el vacío de todos los días",
+      "lines": [
+        "Cuando se apaga la tele y la casa queda callada.",
+        "Al volver de las vacaciones.",
+        "Justo después de lograr algo que esperabas.",
+        "El celular en la mano, sin ver nada."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Darse cuenta,\n*antes de taparlo*.",
+      "body": "El celular o la heladera: muchas veces llenamos el vacío sin notarlo.\n\nNotar lo que te pasa mientras te pasa es el primer paso. Recién ahí podés elegir qué hacer."
+    },
+    {
+      "layout": "note",
+      "title": "La próxima vez",
+      "hand": "para probar",
+      "steps": [
+        "Cuando agarres el celular sin pensar, pará.",
+        "Dejalo boca abajo y respirá una vez.",
+        "Preguntate: ¿qué estoy sintiendo ahora?"
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si ese vacío vuelve una y otra vez, escribime y lo miramos.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
