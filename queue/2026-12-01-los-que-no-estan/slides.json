@@ -1,0 +1,87 @@
+{
+  "theme": "arcilla",
+  "publishAt": "2026-12-01T19:00:00-03:00",
+  "note": "Semana de las fiestas, el reel: un minuto para alguien que este año no va a estar en la mesa (por muerte, distancia o una relación que se cortó). Es una silla vacía suave, para hacer en casa. Mismo formato y música, fondo arcilla. Línea Vida al final del texto.",
+  "caption": "Un minuto para los que este año no van a estar en la mesa.\n\nPuede ser alguien que murió, alguien que está lejos, o alguien con quien ya no hablás. En las fiestas, esas ausencias se sienten más.\n\nEn Gestalt a veces trabajamos con una silla vacía: le hablamos en voz alta a quien no está. Este ejercicio es una forma chiquita de hacerlo.\n\nGuardalo para estos días. Si te remueve mucho, hacelo con compañía.\n\nSi querés hablar de alguien que extrañás, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estos días se hacen muy difíciles, no los cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #fiestas #duelo #respiracion",
+  "reel": {
+    "duration": 84,
+    "bg": "strong",
+    "cover": {
+      "bg": "strong",
+      "kicker": "una pausa",
+      "title": "Un minuto\npara los que no están.",
+      "size": 112,
+      "hand": "en estas fiestas"
+    },
+    "scenes": [
+      {
+        "from": 0,
+        "to": 6.5,
+        "title": "Pensá en alguien que este año no va a estar en la mesa.",
+        "size": 88,
+        "hand": "por la razón que sea",
+        "handAt": 2.6
+      },
+      {
+        "from": 6.5,
+        "to": 12,
+        "title": "Imaginá su lugar.",
+        "body": "Cómo se sentaba. Lo que traía."
+      },
+      {
+        "from": 12,
+        "to": 17.5,
+        "title": "Fijate qué aparece en tu cuerpo.",
+        "body": "No hace falta cambiarlo."
+      },
+      {
+        "from": 17.5,
+        "to": 23.3,
+        "title": "Vamos a respirar tres veces.",
+        "size": 96,
+        "body": "Con esa persona cerca."
+      },
+      {
+        "from": 23.3,
+        "to": 62,
+        "breath": {
+          "cycles": 3,
+          "inhale": 5,
+          "exhale": 7,
+          "inWord": "tomá aire",
+          "outWord": "soltalo despacio"
+        }
+      },
+      {
+        "from": 62,
+        "to": 68.5,
+        "title": "Ahora decile algo, en voz baja.",
+        "size": 100,
+        "hand": "lo que te salga",
+        "handAt": 2.4
+      },
+      {
+        "from": 68.5,
+        "to": 74.5,
+        "title": "Puede ser un «te extraño».",
+        "size": 100,
+        "body": "O un «gracias»."
+      },
+      {
+        "from": 74.5,
+        "to": 84,
+        "title": "Volvé despacio a donde estás.",
+        "size": 96,
+        "body": "Si querés hablar de esa persona con compañía, escribime por mensaje directo.",
+        "last": true,
+        "sign": true,
+        "handAt": 3
+      }
+    ],
+    "music": {
+      "file": "drafts/_assets/music/megisss-megis_zen-breathing-space-488255.mp3",
+      "start": 0,
+      "gainDb": -3
+    }
+  }
+}
