@@ -1,0 +1,87 @@
+{
+  "theme": "salvia",
+  "publishAt": "2026-11-24T19:00:00-03:00",
+  "note": "Semana de la pareja, el reel: un minuto antes de una charla difícil. Mismo formato y música que los reels anteriores, con fondo salvia. Ejercicio: notar el cuerpo, respirar y encontrar la frase que empieza con «yo». Se hace desde un solo lado. Sin datos ni autores. Para confirmar con Rosario: que atiende parejas (el texto invita a escribir «vos, o con tu pareja»).",
+  "caption": "Un minuto para prepararte antes de una charla difícil con tu pareja.\n\nMuchas veces llegamos a esas charlas con todo apretado, y lo que sale es un reproche. Este ejercicio te invita a parar, notar qué te pasa en el cuerpo y buscar la frase que empieza con «yo»: yo siento, yo necesito.\n\nEn Gestalt trabajamos así: hablar desde uno/a mismo/a deja más lugar para que el otro/a escuche.\n\nGuardalo para antes de esa charla que venís postergando.\n\nSi les cuesta hablar sin terminar peleando, escribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #pareja #terapiadepareja #respiracion",
+  "reel": {
+    "duration": 84,
+    "bg": "strong",
+    "cover": {
+      "bg": "strong",
+      "kicker": "una pausa",
+      "title": "Un minuto\nantes de hablar.",
+      "size": 120,
+      "hand": "con tu pareja"
+    },
+    "scenes": [
+      {
+        "from": 0,
+        "to": 6.5,
+        "title": "Pensá en algo que querés decirle a tu pareja.",
+        "size": 92,
+        "hand": "y venís postergando",
+        "handAt": 2.6
+      },
+      {
+        "from": 6.5,
+        "to": 12,
+        "title": "Fijate qué te pasa al pensarlo.",
+        "body": "Puede ser un nudo en la garganta, o calor en la cara."
+      },
+      {
+        "from": 12,
+        "to": 17.5,
+        "title": "No lo resuelvas todavía.",
+        "body": "Quedate con eso un momento."
+      },
+      {
+        "from": 17.5,
+        "to": 23.3,
+        "title": "Vamos a respirar tres veces.",
+        "size": 96,
+        "body": "Despacio, sin apuro."
+      },
+      {
+        "from": 23.3,
+        "to": 62,
+        "breath": {
+          "cycles": 3,
+          "inhale": 5,
+          "exhale": 7,
+          "inWord": "tomá aire",
+          "outWord": "soltalo despacio"
+        }
+      },
+      {
+        "from": 62,
+        "to": 68.5,
+        "title": "Ahora buscá la frase que empieza con «yo».",
+        "size": 92,
+        "hand": "yo siento… yo necesito…",
+        "handAt": 2.4
+      },
+      {
+        "from": 68.5,
+        "to": 74.5,
+        "title": "Decila en voz baja, para vos.",
+        "size": 100,
+        "body": "Escuchá cómo suena dicha así."
+      },
+      {
+        "from": 74.5,
+        "to": 84,
+        "title": "Después, si querés, decísela a tu pareja.",
+        "size": 92,
+        "body": "Si les cuesta hablar, escribime por mensaje directo.",
+        "last": true,
+        "sign": true,
+        "handAt": 3
+      }
+    ],
+    "music": {
+      "file": "drafts/_assets/music/megisss-megis_zen-breathing-space-488255.mp3",
+      "start": 0,
+      "gainDb": -3
+    }
+  }
+}
