@@ -1,0 +1,47 @@
+{
+  "theme": "salvia",
+  "textSize": "large",
+  "publishAt": "2026-11-25T10:00:00-03:00",
+  "note": "Semana de la pareja (2 de 3: la decisión que no se toma). Paleta «salvia». Mirada gestáltica: las dos partes (una quiere, otra no) y lo que queda abierto. No aconseja seguir ni separarse; el ejercicio se hace desde un solo lado. Para confirmar con Rosario: que atiende parejas (el texto invita a escribir «vos, o con tu pareja»).",
+  "caption": "Seguir o separarse. Mudarse o no. Agrandar la familia. Hay decisiones de pareja que pasan meses en «ya lo vamos a hablar», y mientras tanto pesan todos los días.\n\nEn Gestalt pensamos que lo que no se decide queda abierto y gasta energía. Muchas veces se traba porque una parte nuestra quiere y otra no, y una de las dos nunca pudo hablar.\n\nPara probar: escribí en una hoja lo que dice la parte que quiere, y en otra lo que dice la que no. Leelas en voz alta y fijate cuál te cuesta más decir.\n\nSi hay una decisión trabada en tu pareja, escribime por mensaje directo para una consulta de bienvenida. Podés venir con tu pareja, o empezar por vos. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #pareja #terapiadepareja #decisiones",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Esa decisión\nque nunca se toma.",
+      "size": 112,
+      "hand": "«ya lo vamos a hablar»"
+    },
+    {
+      "bg": "soft",
+      "kicker": "a veces es",
+      "lines": [
+        "Seguir o separarse.",
+        "Mudarse, o seguir cada quien en su casa.",
+        "Agrandar la familia, o no.",
+        "Meses de «ya lo vamos a hablar»."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Una parte quiere,\n*otra no*.",
+      "body": "Lo que no se decide queda abierto y gasta energía todos los días.\n\nEscuchamos a las dos partes, sin apurar ninguna. Muchas veces la decisión se traba porque una nunca pudo hablar."
+    },
+    {
+      "layout": "note",
+      "title": "Para probar",
+      "hand": "papel y lapicera",
+      "steps": [
+        "En una hoja, escribí lo que dice la parte que quiere.",
+        "En otra, lo que dice la parte que no.",
+        "Leé las dos en voz alta. ¿Cuál te cuesta más decir?"
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Una decisión trabada se puede mirar con calma.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
