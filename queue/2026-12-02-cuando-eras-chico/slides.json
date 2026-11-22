@@ -1,0 +1,47 @@
+{
+  "theme": "arcilla",
+  "textSize": "large",
+  "publishAt": "2026-12-02T10:00:00-03:00",
+  "note": "Semana de las fiestas (2 de 3: la Navidad de la infancia). Paleta «arcilla». El recuerdo es del lector/a, no de Rosario. Mirada gestáltica: el recuerdo se siente ahora y es una pista de lo que hoy falta. El texto también nombra a quienes no tuvieron fiestas lindas. Línea Vida al final.",
+  "caption": "El patio lleno, el calor de la noche, el pan dulce y la sidra. Esperar las doce sin poder dormir. Alguien que ya no está, sentado en la punta de la mesa. O quizás aquellas fiestas no eran lindas, y eso también vuelve.\n\nCuando un recuerdo vuelve, lo sentimos ahora, en este cuerpo. En Gestalt lo tomamos como una pista: muchas veces muestra algo que hoy te está faltando.\n\nPara probar: cerrá los ojos y volvé a esa noche por un olor, un sonido o un sabor. Fijate qué sentís ahora y qué de eso te falta hoy. Elegí un gesto chiquito para traerlo a estas fiestas.\n\nSi ese recuerdo te deja un nudo, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estos días se hacen muy difíciles, no los cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #fiestas #navidad #aquiyahora",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "La Navidad\nde cuando eras chico/a.",
+      "size": 108,
+      "hand": "¿a qué olía?"
+    },
+    {
+      "bg": "soft",
+      "kicker": "a lo mejor era así",
+      "lines": [
+        "El patio lleno y el calor de la noche.",
+        "El pan dulce y la sidra.",
+        "Esperar las doce sin poder dormir.",
+        "Alguien que ya no está, sentado en la punta de la mesa."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Ese recuerdo\n*se siente hoy*.",
+      "body": "Cuando vuelve, lo sentimos ahora, en este cuerpo.\n\nLo tomamos como una pista: muchas veces muestra algo que hoy te está faltando."
+    },
+    {
+      "layout": "note",
+      "title": "Para probar",
+      "hand": "con los ojos cerrados",
+      "steps": [
+        "Volvé a esa noche por un olor, un sonido o un sabor.",
+        "Fijate qué sentís ahora, y qué de eso te falta hoy.",
+        "Elegí un gesto chiquito para traerlo a estas fiestas."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si ese recuerdo te deja un nudo, lo miramos con tiempo.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
