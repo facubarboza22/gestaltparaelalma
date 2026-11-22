@@ -1,0 +1,47 @@
+{
+  "theme": "arcilla",
+  "textSize": "large",
+  "publishAt": "2026-11-30T10:00:00-03:00",
+  "note": "Semana de las fiestas (1 de 3: la mezcla de ganas y tristeza). Paleta «arcilla». Darse cuenta de lo que hay, sin corregirlo. Toca duelo y soledad: tono suave y Línea Vida al final del texto.",
+  "caption": "Se acercan las fiestas y en el pecho aparece una mezcla rara: ganas de juntarte y ganas de que pase rápido. Una silla que este año va a estar vacía. Un año que termina, y algo que queda atrás.\n\nEn diciembre parece que hay que estar contentos/as. En Gestalt empezamos por darnos cuenta de lo que sentimos, sin corregirlo.\n\nPara estos días: poné una mano en el pecho y nombrá en voz baja lo que hay ahí. No elijas una sola cosa. Dejá que estén todas un rato.\n\nSi diciembre te pesa, escribime por mensaje directo para una consulta de bienvenida. Atiendo en Uruguay y también online. 🌱\n\nSi estos días se hacen muy difíciles, no los cargues en soledad: la Línea Vida atiende gratis las 24 horas (0800 0767 o *0767). Fuera de Uruguay, buscá la línea de ayuda de tu país.\n\n#terapiagestalt #gestalt #fiestas #findeaño #saludemocional",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "Se acercan las fiestas\ny algo se mueve en el pecho.",
+      "size": 100,
+      "hand": "ganas y tristeza, todo junto"
+    },
+    {
+      "bg": "soft",
+      "kicker": "se parece a esto",
+      "lines": [
+        "Armar el arbolito y que se te cierre la garganta.",
+        "Ganas de juntarte, y ganas de que pase rápido.",
+        "Una silla que este año va a estar vacía.",
+        "El año termina, y algo queda atrás."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Darle lugar\n*a lo que hay*.",
+      "body": "En diciembre parece que hay que estar contentos/as. Muchas veces el cuerpo dice otra cosa.\n\nEmpezamos por darnos cuenta de lo que sentimos, sin corregirlo. Lo que se aprieta, pesa más."
+    },
+    {
+      "layout": "note",
+      "title": "Para estos días",
+      "hand": "un minuto",
+      "steps": [
+        "Poné una mano en el pecho.",
+        "Nombrá en voz baja lo que hay ahí: ganas, pena, lo que sea.",
+        "No elijas una. Dejá que estén todas un rato."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si diciembre te pesa, lo podemos mirar con calma.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
