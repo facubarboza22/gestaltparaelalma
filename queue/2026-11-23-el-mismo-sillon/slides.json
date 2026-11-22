@@ -1,0 +1,47 @@
+{
+  "theme": "salvia",
+  "textSize": "large",
+  "publishAt": "2026-11-23T18:00:00-03:00",
+  "note": "Semana de la pareja (1 de 3: el desencuentro y querer tener razón). Paleta «salvia». Sin datos ni autores; el centro es el contacto (lo que pasa entre los dos) y hablar en primera persona. Sale el lunes a las 18:00 para dar tiempo a revisarlo. Para confirmar con Rosario: que atiende parejas (el texto invita a escribir «vos, o con tu pareja»).",
+  "caption": "Están en el mismo sillón, cada uno/a con su celular, y se sienten lejos. Hablan de cuentas y de horarios. Y vuelve la misma discusión de siempre, con otras palabras.\n\nEn Gestalt miramos el contacto: cómo se encuentran dos personas aquí y ahora, o cómo no se encuentran. Querer tener razón es humano. Mientras cada quien defiende la suya, nadie escucha.\n\nPara esta semana: en la próxima discusión, pará un segundo y cambiá el «vos siempre» por «yo siento». Fijate qué cambia en tu cuerpo y en la charla.\n\nSi la distancia se instaló en casa, escribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #pareja #terapiadepareja #vinculos",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "En el mismo sillón,\ny tan lejos.",
+      "size": 112,
+      "hand": "y nadie lo dice"
+    },
+    {
+      "bg": "soft",
+      "kicker": "se parece a esto",
+      "lines": [
+        "Hablar solo de cuentas y horarios.",
+        "La misma discusión de siempre, con otras palabras.",
+        "«¿Qué te pasa?» «Nada.»",
+        "Ganar la pelea y quedar más lejos."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Lo que pasa\n*entre los dos*.",
+      "body": "Miramos cómo se encuentran, aquí y ahora, o cómo no se encuentran.\n\nQuerer tener razón es humano. Mientras cada quien defiende la suya, nadie escucha, y la distancia crece sin que nadie la elija."
+    },
+    {
+      "layout": "note",
+      "title": "Para esta semana",
+      "hand": "desde tu lado",
+      "steps": [
+        "En la próxima discusión, pará un segundo.",
+        "Cambiá el «vos siempre» por «yo siento».",
+        "Fijate qué cambia en tu cuerpo y en la charla."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Si la distancia se instaló en casa, se puede mirar con alguien de afuera.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
