@@ -1,0 +1,47 @@
+{
+  "theme": "salvia",
+  "textSize": "large",
+  "publishAt": "2026-11-27T10:00:00-03:00",
+  "note": "Semana de la pareja (3 de 3: animarse a ir a terapia de pareja). Paleta «salvia». Los miedos de siempre y la mirada gestáltica de la consulta (sin culpables, lo que pasa aquí y ahora). Si la pareja no quiere, se puede empezar solo/a. No promete resultados. Para confirmar con Rosario: que atiende parejas (el texto invita a escribir «vos, o con tu pareja»).",
+  "caption": "«¿Terapia de pareja? No estamos tan mal.» Y así pasan los años.\n\nA veces lo que frena son los miedos: que alguien de afuera tome partido, que salgan cosas que nunca se dijeron, que ir sea admitir que fracasaron.\n\nEn la consulta no buscamos culpables. Miramos cómo se encuentran, aquí y ahora, y qué le pasa a cada uno/a. Ir es una forma de cuidar algo que te importa, antes de que duela más.\n\nPara dar el paso: fijate cuál de esos miedos es el tuyo y decíselo a tu pareja tal cual. Si no quiere venir, podés empezar vos.\n\nEscribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja. Atiendo en Uruguay y también online. 🌱\n\n#terapiagestalt #gestalt #pareja #terapiadepareja #vinculos",
+  "slides": [
+    {
+      "layout": "cover",
+      "bg": "strong",
+      "title": "¿Terapia de pareja?\nNo estamos tan mal.",
+      "size": 104,
+      "hand": "y así pasan los años"
+    },
+    {
+      "bg": "soft",
+      "kicker": "los miedos de siempre",
+      "lines": [
+        "Que alguien de afuera tome partido.",
+        "Que salgan cosas que nunca se dijeron.",
+        "Que ir sea admitir que fracasamos.",
+        "Que tu pareja diga que no."
+      ]
+    },
+    {
+      "bg": "strong",
+      "kicker": "en gestalt",
+      "title": "Acá no hay\n*culpables*.",
+      "body": "Miramos cómo se encuentran, aquí y ahora, y qué le pasa a cada uno/a. Nadie tiene que ganar.\n\nIr es una forma de cuidar algo que te importa, antes de que duela más."
+    },
+    {
+      "layout": "note",
+      "title": "Para dar el paso",
+      "hand": "de a poco",
+      "steps": [
+        "Fijate cuál de esos miedos es el tuyo.",
+        "Decíselo a tu pareja tal cual: «me da miedo que…».",
+        "Si no quiere venir, podés empezar vos."
+      ]
+    },
+    {
+      "layout": "cta",
+      "title": "Pedir ayuda también es cuidar la pareja.",
+      "body": "Escribime por mensaje directo para una consulta de bienvenida. Podés escribirme vos, o con tu pareja.\n\nAtiendo en Uruguay y también online."
+    }
+  ]
+}
